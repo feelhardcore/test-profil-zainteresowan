@@ -1,0 +1,15 @@
+.selected {
+
+    border: 5px inset red !important;
+}
+.test-question{
+    padding: 20px;
+    border: 1px solid black;
+    max-width: 500px;
+    width: 100%;
+}
+.test-question-option{
+    padding: 10px;
+    margin: 10px auto;
+    border: 5px inset black;
+}

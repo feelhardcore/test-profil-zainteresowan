@@ -1,0 +1,9 @@
+.test-question-number{
+    text-align: center;
+    font-weight: 600;
+    font-style: italic;
+    padding: 10px
+}
+.test-main{
+    max-width: 300px;
+}

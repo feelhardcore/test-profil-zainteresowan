@@ -1,0 +1,12 @@
+.test-header-title{
+    font-weight: bold;
+    font-style: italic;
+    font-size: 2em;
+    text-align: center;
+}
+.test-header-instructions{
+    font-weight: bolder;
+    font-size: 1.1em;
+    text-align: center;
+    padding: 10px;
+}
