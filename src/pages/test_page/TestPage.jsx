@@ -2,10 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import TestHeader from "../../components/test_header/TestHeader";
 import TestQuestion from "../../components/TestQuestion/TestQuestion";
 import './TestPage_styles.css'
+import {useNavigate} from 'react-router-dom'
 
 export default function TestPage(props){
 
 
+    const c = useNavigate()
 
 
     const answerMatrix = useRef(
@@ -26,6 +28,8 @@ export default function TestPage(props){
     const [questionNumber, setQuestionNumber] = useState(0);
     const unansweredQuestions = useRef([])
     const [matrixCoords, setMatrixCoords] = useState([0,0])
+    const [testCompleted,setTestCompleted] = useState(false)
+    const [autoAdvance,setAutoAdvance] = useState(false)
     
 
     const answerHook = (option) => {
@@ -35,6 +39,10 @@ export default function TestPage(props){
         console.log("Coords: "+matrixCoords[0] + "/" +matrixCoords[1])
         console.log("Updated value :"+ option)
         setAnswer(option);
+        checkForCompletion()
+        if(autoAdvance && questionNumber != 99){
+            nextQuestion()
+        }
     }
 
     const checkForAnsweredQuestion = () => {
@@ -50,7 +58,14 @@ export default function TestPage(props){
     },[questionNumber])
 
     const checkForCompletion = () => {
-        if (answerMatrix.current.includes(null)) return false; return true;
+        let testCompleted = true;
+        for(let i = 0;i<10;i++){
+            if(answerMatrix.current[i].includes(null)){
+                testCompleted = false
+                break;
+            }
+        }
+        setTestCompleted(testCompleted)
     }
 
     const nextQuestion= () => {
@@ -85,6 +100,42 @@ export default function TestPage(props){
         console.log(unansweredQuestions.current)
     }
 
+    const submit = () => {
+        c('/results',{ replace : true, state : {data : {
+            results : calculateResults(answerMatrix.current),
+            answers : answerMatrix.current
+        }}})
+    }
+    const submitOverride = () => {
+        let array= new Array(10)
+        .fill(0)
+        .map(e=>(new Array(10))
+        .fill(0)
+        .map(e=> Math.random()<0.7?0:1))
+        c('/results',{ replace : true, state : {data : {
+            results : calculateResults(array),
+            answers : array
+        }}})
+    }
+
+    const toggleAutoAdvance = () => {
+        setAutoAdvance(!autoAdvance);
+    }
+
+    const calculateResults = (array) => {
+        let columnResult = [0,0,0,0,0,0,0,0,0,0]
+        let rowResult = [0,0,0,0,0,0,0,0,0,0]
+        let totalResult = [0,0,0,0,0,0,0,0,0,0]
+        for (let i = 0; i<10;i++){
+            for (let j = 0;j<10;j++){
+                if (array[i][j] == 0) columnResult[j]++
+                else rowResult[i]++ 
+            }
+
+        }
+        totalResult = totalResult.map((e,i) => {return columnResult[i]+rowResult[i]})
+        return [[...rowResult],[...columnResult],[...totalResult]];
+    }
 
 
     return (
@@ -100,6 +151,10 @@ export default function TestPage(props){
             {questionNumber != 99 ? <button onClick={nextQuestion}> Dalej</button> : null}
             {questionNumber != 0 ? <button onClick={previousQuestion}> Poprzednia</button> : null}
             <button onClick={showMatrix}> pokaz odpo</button>
+            <button onClick = {toggleAutoAdvance} style={{backgroundColor : autoAdvance? "lightgreen": null}}>Automatycznie przechodz do kolejnego</button>
+
+            <button onClick = {submit} style={{display: testCompleted ? "block" : "none"}}>sprawdz</button>
+            <button onClick = {submitOverride}>Przejdz do konca testu z losowymi odpowiedziami</button>
 
         </div>
         )
