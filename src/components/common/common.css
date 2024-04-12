@@ -1,0 +1,106 @@
+@media screen and (max-width : 600px) {
+    .heading-small{
+        text-align: center !important; 
+
+    }
+    
+}
+.heading-small{
+    text-align: left;
+    padding: 10px;
+}
+/*Circle*/
+.circle{
+    border-radius: 50%;
+    border: 2px solid var(--light-blue);
+    background-color: var(--white);
+    position: relative;
+    margin: auto;
+}
+/*Arrows*/
+.arrow {
+    border-width: 0 3px 3px 0;
+    border-color: var(--light-blue);
+    border-style: solid;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    padding: 5px;
+    width: 7px;
+    height: 7px;
+    margin: auto;
+}
+.arrow-right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    right: 7px;
+  }
+  
+.arrow-left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+    left : 7px;
+}
+
+.arrow-top {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+    top: 7px;
+    animation-name: arrUp;
+    animation-duration: 500ms;
+    animation-fill-mode: forwards;
+}
+
+.arrow-bottom {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    bottom: 7px;
+    animation-name: arrDown;
+    animation-duration: 500ms;
+    animation-fill-mode: forwards;
+
+}
+
+@keyframes arrUp {
+    to{
+        top :7px;
+        bottom: 0;
+        transform: rotate(-135deg);
+        -webkit-transform: rotate(-135deg);
+    }
+    from{
+        bottom: 7px;
+        top: 0px;
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+    }
+}
+@keyframes arrDown {
+    from{
+        top :7px;
+        bottom: 0;
+        transform: rotate(-135deg);
+        -webkit-transform: rotate(-135deg);
+    }
+    to{
+        bottom: 7px;
+        top: 0px;
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+    }
+}
+
+
+.expand-bar{
+   position : relative
+}
+.expand-bar hr {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    top: 25px;
+}

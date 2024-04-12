@@ -1,0 +1,27 @@
+@media screen and (max-width : 600px){
+
+
+}
+
+.category-desc{
+    text-align: justify;
+    padding: 0 20px;
+    margin-top: 20px;
+
+}
+#category-desc-content{
+    overflow: hidden;
+
+}
+#category-desc-content-expandable {
+    margin-top: -100%;
+    transition-duration: 500ms;
+    transition-property: all;
+
+}
+.category-desc-content-p{
+    padding: 10px;
+}
+#category-desc-content-expandable.expanded{
+    margin-top: 0;
+}

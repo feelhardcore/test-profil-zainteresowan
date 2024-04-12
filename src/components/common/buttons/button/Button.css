@@ -1,0 +1,20 @@
+.button{
+    width: fit-content;
+    border: 1px solid black;
+    border-radius: 90px;
+    padding: 5px 15px;
+    margin: 10px auto;
+    background-image: gray;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    font-size: 1.1em;
+}
+.toggle{
+    background-image: inherit;
+    opacity: 100%;
+    
+}
+.notoggle{
+    opacity: 30%;
+}

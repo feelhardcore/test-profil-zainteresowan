@@ -5,10 +5,25 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  max-width: 800px;
+  background: lightgray;
+}
+html{
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+#root{
+  max-width: 1100px;
+  margin: auto;
+  background: white;
+}
+.content{
+  margin: auto;
+  width: fit-content;
+  text-align: center;
+}
+.button-rnd-g{
+  margin: 10px auto;
 }

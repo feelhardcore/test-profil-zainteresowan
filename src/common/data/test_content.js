@@ -604,3 +604,5 @@ export const test_content = [
 export const test_content_categories = [
     "M","R","H","J","W","S","K","T","P","A"
 ]
+
+export const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pharetra ex est, id varius tellus malesuada non. Pellentesque ac venenatis erat. Vestibulum non velit eu ipsum rhoncus egestas. Curabitur eget nisl vitae ligula lobortis eleifend. Etiam aliquet elementum diam non tempor. Donec mi enim, semper eget mauris ut, blandit mattis sem. Duis scelerisque risus non mauris vestibulum, eu vestibulum metus congue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pharetra ex est, id varius tellus malesuada non. Pellentesque ac venenatis erat. Vestibulum non velit eu ipsum rhoncus egestas. Curabitur eget nisl vitae ligula lobortis eleifend. Etiam aliquet elementum diam non tempor. Donec mi enim, semper eget mauris ut, blandit mattis sem. Duis scelerisque risus non mauris vestibulum, eu vestibulum metus congue. "

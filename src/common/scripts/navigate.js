@@ -1,15 +1,29 @@
 import { paths } from "../data/paths"
+import { navigate as nav } from "../../App"
 
 export function navigateToHome(navhook){
-    navigate(navhook,paths.home)
+    navigate(paths.home)
 }
 
 
 export function navigateToTest(navhook){
-    navigate(navhook,paths.test_start)
+    navigate(paths.test_start)
 
 }
 
-function navigate(navhook,destination){
-    navhook(destination)
+export function navigateToResults(results){
+    navigate(paths.results,results)
 }
+
+function navigate(destination, props = null){
+    
+    console.log("using sum hookers")
+    if(props){
+        nav.hook(destination,props)
+    }
+    else{
+        nav.hook(destination)
+    }
+    
+}
+

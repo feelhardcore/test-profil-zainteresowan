@@ -4,12 +4,10 @@ import { Bar } from "react-chartjs-2"
 import 'chart.js/auto'
 import './TestResult.css'
 
-export default function TestResult(props){
+export default function TestResult(_props){
 
     const location = useLocation()
-
     const testData = location.state.data
-
     const testAnswers = testData.answers
     const testResults = testData.results
 

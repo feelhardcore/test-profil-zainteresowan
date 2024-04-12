@@ -3,8 +3,11 @@ import TestHeader from "../../components/test_header/TestHeader";
 import TestQuestion from "../../components/TestQuestion/TestQuestion";
 import './TestPage_styles.css'
 import {useNavigate} from 'react-router-dom'
+import { navigateToResults } from "../../common/scripts/navigate";
 
-export default function TestPage(props){
+export default function TestPage(_props){
+
+    
 
 
     const c = useNavigate()
@@ -101,7 +104,7 @@ export default function TestPage(props){
     }
 
     const submit = () => {
-        c('/results',{ replace : true, state : {data : {
+        c('/results',{ replace : false, state : {data : {
             results : calculateResults(answerMatrix.current),
             answers : answerMatrix.current
         }}})
@@ -109,10 +112,10 @@ export default function TestPage(props){
     const submitOverride = () => {
         let array= new Array(10)
         .fill(0)
-        .map(e=>(new Array(10))
+        .map(_e=>(new Array(10))
         .fill(0)
-        .map(e=> Math.random()<0.7?0:1))
-        c('/results',{ replace : true, state : {data : {
+        .map(_e=> Math.random()<0.7?0:1))
+        navigateToResults({ replace : false, state : {data : {
             results : calculateResults(array),
             answers : array
         }}})
@@ -133,9 +136,11 @@ export default function TestPage(props){
             }
 
         }
-        totalResult = totalResult.map((e,i) => {return columnResult[i]+rowResult[i]})
+        totalResult = totalResult.map((_e,i) => {return columnResult[i]+rowResult[i]})
         return [[...rowResult],[...columnResult],[...totalResult]];
     }
+
+    
 
 
     return (
