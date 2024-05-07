@@ -5,7 +5,10 @@ export default function Arrow(props){
     const lockFacing = props.lockFacing || false
     const [facing,setFacing] = useState(props.facing)
 
-    const onClickFunc = props.fn
+    const nullfbn = () => null;
+    const onClickFunc = props.fn || nullfbn
+
+    
 
     const className = () => {
         let base = "arrow ";

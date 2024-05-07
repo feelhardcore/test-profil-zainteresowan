@@ -10,56 +10,56 @@
     --white : #ffffff;
 }
 .white{
-    color: var(--white);
+    color: var(--white) !important;
 }
 .white-bg{
-    background-color: var(--white);
+    background-color: var(--white) !important;
 }
 .light-yellow{
-    color : var(--light-yellow)
+    color : var(--light-yellow) !important
 }
 .light-yellow-bg{
-    background-color: var(--light-yellow)
+    background-color: var(--light-yellow) !important
 }
 .yellow{
-    color : var(--yellow)
+    color : var(--yellow) !important
 }
 .yellow-bg{
-    background-color: var(--yellow)
+    background-color: var(--yellow) !important
 }
 .red{
-    color : var(--red)
+    color : var(--red) !important
 }
 .red-bg{
-    background-color: var(--red)
+    background-color: var(--red) !important
 }
 .blue{
-    color : var(--blue)
+    color : var(--blue) !important
 }
 .blue-bg{
-    background-color: var(--blue)
+    background-color: var(--blue) !important
 }
 .light-gray{
-    color : var(--light-gray)
+    color : var(--light-gray) !important
 }
 .light-gray-bg{
-    background-color: var(--light-gray)
+    background-color: var(--light-gray) !important
 }
 .light-blue{
-    color : var(--light-blue)
+    color : var(--light-blue) !important
 }
 .light-blue-bg{
-    background-color: var(--light-blue)
+    background-color: var(--light-blue) !important
 }
 .light-green{
-    color : var(--light-green)
+    color : var(--light-green) !important
 }
 .light-green-bg{
-    background-color: var(--light-green)
+    background-color: var(--light-green) !important
 }
 .green{
-    color : var(--green)
+    color : var(--green) !important
 }
 .green-bg{
-    background-color: var(--green)
+    background-color: var(--green) !important
 }

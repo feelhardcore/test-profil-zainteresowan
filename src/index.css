@@ -17,7 +17,9 @@ code {
 #root{
   max-width: 1100px;
   margin: auto;
+  font-size : var(--standard);
   background: white;
+  padding: 5px 0;
 }
 .content{
   margin: auto;
@@ -26,4 +28,10 @@ code {
 }
 .button-rnd-g{
   margin: 10px auto;
+}
+.text-center{
+  text-align: center;
+}
+.text-right{
+  text-align: right;
 }

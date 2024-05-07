@@ -7,6 +7,12 @@ import TestResult from './pages/test_result/TestResult';
 import Header from './components/header/Header';
 import InfoPopup from './components/popup/Popup';
 import './common/css/colors.css'
+import './common/css/fonts.css'
+import Footer from './components/footer/Footer';
+import './common/css/display.css'
+import './common/css/position.css'
+import './common/css/text-align.css'
+import './common/css/float.css'
 
 function App() {
   return (
@@ -26,7 +32,7 @@ function App() {
         
       </Routes>
     </div>
-    
+    <Footer/>
   </BrowserRouter>
   
   )

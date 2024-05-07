@@ -22,8 +22,6 @@ export default function CategoryDescription(props){
     }
 
     const onEnd = e => {
-        if(expand)
-        e.target.firstChild.scrollIntoView({behavior : "smooth", block : "start"})
     }
 
 

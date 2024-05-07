@@ -4,6 +4,10 @@ import TestQuestion from "../../components/TestQuestion/TestQuestion";
 import './TestPage_styles.css'
 import {useNavigate} from 'react-router-dom'
 import { navigateToResults } from "../../common/scripts/navigate";
+import QuestionPanel from "../../components/QuestionsPanel/QuestionsPanel";
+import Arrow, { direction } from "../../components/common/Arrow";
+import ButtonRoundGreen from "../../components/common/buttons/button_round_green/ButtonRoundGreen";
+import Border from "../../components/common/Border.tsx";
 
 export default function TestPage(_props){
 
@@ -32,20 +36,18 @@ export default function TestPage(_props){
     const unansweredQuestions = useRef([])
     const [matrixCoords, setMatrixCoords] = useState([0,0])
     const [testCompleted,setTestCompleted] = useState(false)
-    const [autoAdvance,setAutoAdvance] = useState(false)
+    const [set,setSet] = useState(0)
+    const [nextSet, setNextSet] = useState(false)
+    const [nextPage,setNextPage] = useState(1)
+    const [nextDirection, setNextDirection] = useState(false)
+
+    const setFinished = useRef(false)
+
     
 
-    const answerHook = (option) => {
+    const answerHook = (questionNumber,option) => {
+        answerMatrix.current[set][questionNumber%10] = option
 
-        console.log("Updating matrix answers")
-        console.log("Current question id:" +questionNumber)
-        console.log("Coords: "+matrixCoords[0] + "/" +matrixCoords[1])
-        console.log("Updated value :"+ option)
-        setAnswer(option);
-        checkForCompletion()
-        if(autoAdvance && questionNumber != 99){
-            nextQuestion()
-        }
     }
 
     const checkForAnsweredQuestion = () => {
@@ -90,9 +92,6 @@ export default function TestPage(_props){
         moveToQuestion(questionNumber-1)
     }
 
-    const setAnswer = (value) => {
-        answerMatrix.current[matrixCoords[1]][matrixCoords[0]] = value;
-    }
 
     const getAnswer = () => {
         return answerMatrix.current[matrixCoords[1]][matrixCoords[0]]
@@ -122,7 +121,7 @@ export default function TestPage(_props){
     }
 
     const toggleAutoAdvance = () => {
-        setAutoAdvance(!autoAdvance);
+        slideOutQuestions()
     }
 
     const calculateResults = (array) => {
@@ -140,6 +139,40 @@ export default function TestPage(_props){
         return [[...rowResult],[...columnResult],[...totalResult]];
     }
 
+
+    const slideOutQuestions = () => {
+
+        setNextSet(true)
+    }
+
+    const onSlideOut = () => {
+        console.log("finish sliding off")
+        if(nextSet) setSet(nextPage)
+        setNextSet(false)
+    }
+
+
+    const setAnswer = (questionNumber, value) => {
+        let matrixX = questionNumber / 10 
+        let matrixY = questionNumber % 10
+        answerMatrix.current[matrixX][matrixY] = value
+    }
+
+    const moveToNextPage = () => {
+        setNextPage(set => set+1)
+        setNextDirection(false)
+        slideOutQuestions()
+    }
+    const moveToPrevPage = () => {
+        setNextPage(set => set-1)
+        setNextDirection(true)
+        slideOutQuestions()
+    }
+
+
+    const getCurrentAnswersForSet = () => {
+        return answerMatrix.current[set]
+    }
     
 
 
@@ -147,20 +180,23 @@ export default function TestPage(_props){
         <div className="test-main">
 
             <TestHeader/>
+            <QuestionPanel 
+                answerHook = {answerHook}
+                onSlideOut = {() => onSlideOut()} 
+                nextSet = {nextSet} 
+                nextDirection = {nextDirection}
+                questionSet = {set}
+                currentAnswers = {getCurrentAnswersForSet()}
+                >
+            </QuestionPanel>
 
-            <div className="test-question-number">Pytanie {questionNumber+1}/100</div>
-            
-            <TestQuestion questionNumber = {questionNumber} answerHook={answerHook} initialState = {getAnswer()}/>
-
-            
-            {questionNumber != 99 ? <button onClick={nextQuestion}> Dalej</button> : null}
-            {questionNumber != 0 ? <button onClick={previousQuestion}> Poprzednia</button> : null}
-            <button onClick={showMatrix}> pokaz odpo</button>
-            <button onClick = {toggleAutoAdvance} style={{backgroundColor : autoAdvance? "lightgreen": null}}>Automatycznie przechodz do kolejnego</button>
-
-            <button onClick = {submit} style={{display: testCompleted ? "block" : "none"}}>sprawdz</button>
-            <button onClick = {submitOverride}>Przejdz do konca testu z losowymi odpowiedziami</button>
-
-        </div>
+            <Border>cos tam</Border>
+            <div style = {{display : "inline-block", width: "100%", userSelect : "none"}}>
+        
+                <div style={{width : "50%", float : "left"}}><Arrow fn = {moveToPrevPage} lockFacing = {true} facing = {direction.left}/></div>
+                <div style={{width : "50%", float : "right"}}><Arrow fn = {moveToNextPage} lockFacing = {true} facing = {direction.right}/></div>
+            </div>
+            <ButtonRoundGreen text = "Sprawdź" fn =  {submit}   ></ButtonRoundGreen>
+            </div>
         )
 }

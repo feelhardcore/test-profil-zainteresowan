@@ -1,0 +1,29 @@
+/* font sizes*/
+
+:root{
+    --standard: 12pt;
+    --larger: 14pt;
+    --big: 16pt;
+    --heading-big : 20pt;
+    --heading-medium : 16pt;
+    --heading-small : 13pt;
+}
+
+.font-standard{
+    font-size: var(--standard);
+}
+.font-larger{
+    font-size: var(--larger)
+}
+.font-big{
+    font-size: var(--big)
+}
+.font-heading-small{
+    font-size: var(--heading-small);
+}
+.font-heading-medium{
+    font-size: var(--heading-medium)
+}
+.font-heading-big{
+    font-size: var(--heading-big);
+}

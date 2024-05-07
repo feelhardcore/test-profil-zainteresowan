@@ -1,0 +1,6 @@
+footer .footer{
+    padding: 20px;
+    text-align: center;
+    font-size: var(--larger);
+    font-style: italic;
+}

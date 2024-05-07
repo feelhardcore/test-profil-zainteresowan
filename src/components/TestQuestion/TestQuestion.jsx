@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import { test_content } from "../../common/data/test_content";
 import './TestQuestion_styles.css'
 
+
 export default function TestQuestion(props)
 {
   
 
     const [currentAnswer,setCurrentAnswer] = useState(props.initialState)
     const questionNumber = props.questionNumber;
-    const answerHook = props.answerHook;
+    const answerHook = props.answerHook || function() {};
     const question = test_content[questionNumber]
     
 
