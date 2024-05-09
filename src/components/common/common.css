@@ -31,7 +31,7 @@
 }
 /*Arrows*/
 .arrow {
-    border-width: 0 3px 3px 0;
+    border-width: 0 4px 4px 0;
     border-color: var(--light-blue);
     border-style: solid;
     display: inline-block;
@@ -182,4 +182,18 @@
 
 .text-left {
     
+}
+
+
+.expandable{
+    transition-duration: 1500ms;
+    transition-property: all;
+    transition-timing-function: ease-in;
+    overflow-y: scroll;
+
+}
+.collapsed{
+    transition-timing-function: cubic-bezier() !important;
+    max-height: 0 !important;
+    overflow: clip;
 }

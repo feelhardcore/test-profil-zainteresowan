@@ -1,5 +1,5 @@
 import { Colors } from "chart.js"
-import { ReactNode } from "react"
+import { DO_NOT_USE_OR_YOU_WILL_BE_FIRED_EXPERIMENTAL_REACT_NODES, ReactNode, SyntheticEvent } from "react"
 
 export type TextAligments = "center" | "left" | "right" | "justify"
 export type Positions = "static" | "relative" | "sticky" | "absolute" | "fixed" 
@@ -9,7 +9,7 @@ export type Units = "px" | "pt" | "%" | "rem" | "vh" | "cm" | "mm" | "in" | "pc"
 export type FontStyles = "italic" | "oblique"
 export type DisplayTypes = "block" | "inline_block" | "table" | "inline" | "flex"
 export type FontWeights = "normal" | "bold" | "bolder" | number
-export type Fonts = "Arial"
+export type Fonts = "text"| "text_bold"| "header" | "header_bold"
 export type Colors = "red" | "blue" | "light_gray" | "light_blue" | "light_green" | "green" | "light_yellow" | "yellow" | "white" | number
 export type BorderStyles = "solid" | "dotted" | "dashed"
 export type Paragraph = {
@@ -33,9 +33,9 @@ export interface HTMLProperties{
 
 export interface ContainerProps{
     textAlign? : TextAligments,
-    border?: BorderProps,
-    margin? : MarginProps,
-    padding? : PaddingProps,
+    border?: BorderProps | string,
+    margin? : MarginProps | string,
+    padding? : PaddingProps | string,
     position? : Position,
     display? : DisplayTypes
     float? : Float,
@@ -43,15 +43,23 @@ export interface ContainerProps{
     htmlProps? : HTMLProperties
     background? : Colors
     positionCoords? : PositionCoords
-    height? : DimenisionProps
-    width? : DimenisionProps
-    maxWidth? : DimenisionProps
-    maxHeight? : DimenisionProps
+    height? : DimenisionProps | string
+    width? : DimenisionProps | string
+    maxWidth? : DimenisionProps | string
+    maxHeight? : DimenisionProps | string
+    react? : ReactProps
+    events? : Events
 
+}
+export interface Events{
+    onClick?(event : SyntheticEvent) : void
+}
+export interface ReactProps{
+    ref? : React.RefObject<any>
 }
 export interface Position{
     type? : Positions,
-    coords? : PositionCoords
+    coords? : PositionCoords | string
 }
 export interface BorderProps{
     color? : Colors,
@@ -100,7 +108,7 @@ export interface FontProps{
     size_unit? : Units
     style? : FontStyles
     weight? : FontWeights
-    font? : Fonts
+    family? : Fonts
     color? : Colors
 }
 export interface PositionCoords{
@@ -144,11 +152,59 @@ export interface TextOptions{
 export type ExpandDirection = "topdown" | "bottomup" | "leftright" | "rightleft"
 export type ExpandBehavior = ""
 export interface ExpandbleContainerProps extends ContainerProps{
-    before? : ReactNode | string
-    after? : ReactNode | string
-    direction : ExpandDirection
+    expandDirection : ExpandDirection
     expandBehavior : ExpandBehavior
-    expandableContainerProps : ContainerProps
 } 
 
-//
+// ExpandBar 
+
+export type FacingDirection = 0 | 1 | 2 | 3
+export interface ExpandBarProps{
+    events? : Events
+    arrowProps? : ArrowProps
+}
+
+//Arrow 
+
+export interface ArrowProps{
+    events? : Events
+    color? : Colors
+    facingDirection? : FacingDirection
+    lockFacing? : boolean
+    dimensions? : number
+}
+
+// Circle
+
+export interface CircleProps{
+    backgroundColor? : Colors
+    dimensions? : number
+    width? : number
+    events? : Events
+    outlineColor? : Colors
+
+}
+
+// Button
+
+export interface ButtonProps{
+    events : Events,
+    toggleable? : boolean,
+    initialToggleState? : boolean
+    font? : FontProps,
+    background? : Colors
+    padding? : PaddingProps
+    margin? : MarginProps
+    disabled? : boolean
+    shouldHandleDisabled? : boolean
+    children? : ReactNode | string
+}
+
+
+export interface CategoryDescription{
+    category_name : string
+    category_content_before? : ReactNode | string
+    category_content_expandable? : ReactNode | string
+    category_content_after? : ReactNode | string
+
+}

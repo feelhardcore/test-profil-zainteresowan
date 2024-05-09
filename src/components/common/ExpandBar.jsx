@@ -1,11 +1,16 @@
-import Arrow, { direction } from "./Arrow";
+import Arrow  from "./Arrow.tsx";
 
 export default function ExpandBar(props){
 
     return (
-        <div className="expand-bar">
+        <div className="expand-bar" style={{margin : "20px 0"}}>
             <hr/>
-            <Arrow fn = {props.fn} facing = {direction.bottom}></Arrow>
+            <Arrow 
+                lockFacing = {false}
+                facingDirection={2}
+            
+            ></Arrow>
+
         </div>
     )
 }

@@ -61,3 +61,10 @@ export const  BORDER_STYLE = {
     dotted : "dotted",
     dashed : "dashed"
 }
+
+export const FONT = {
+    text : "font-text",
+    text_bold : "font-text-bold",
+    header : "font-header",
+    header_bold : "font-header-bold"
+}

@@ -1,30 +1,35 @@
 import { useNavigate } from "react-router"
-import ButtonRoundGreen from "../../components/common/buttons/button_round_green/ButtonRoundGreen"
+import ButtonRoundGreen from "../../components/common/buttons/button_round_green/ButtonRoundGreen.tsx"
 import RedRoundButton from "../../components/common/buttons/RedRoundButton"
 import { buttonProps } from "../../common/scripts/buttonProps.ts"
-import { popup } from "../../App"
 import { navigateToTest } from "../../common/scripts/navigate.js"
 import CategoryDescription from "../../components/category_desc/CategoryDescription.jsx"
 import { lorem } from "../../common/data/test_content.js"
 import HeadingBig from "../../components/common/HeadingBig.jsx"
 import HeadingMedium from "../../components/common/HeadingMedium.jsx"
 import HeadingSmall from "../../components/common/HeadingSmall.jsx"
-import Footer from "../../components/footer/Footer.js"
 import Arrow, { direction } from "../../components/common/Arrow.jsx"
 import Container from "../../components/common/containers/Container.tsx"
+import ExpandableContainer from "../../components/common/containers/ExpandableContainer.tsx"
 
 
 function StartingPage(_props) {
     const nav = useNavigate()
-
-    const testStartButtonProps = buttonProps("Wykonaj test",() => popup.show(2,"Coś z tekstem",3),true)
-    const testStartButtonProps2 = buttonProps("Wykonaj test",() => popup.show(1,"Coś z tekstemdfgfg",3),true)
-    const testStartButtonProps3 = buttonProps("Wykonaj test",() => popup.show(0,"Coś z tekstemdfsgggcfgds",3),true)
     const dummyToggleRed = buttonProps("Dummy toggle red button", () => console.log("dummy func"),true)
+
+
+    const onClickFn = (e) => {
+        console.error("o prosze dziala jednak")
+    }
 
     return (
         <div className="content">
             <Container 
+
+                events={{
+                    onClick : onClickFn
+                }}
+
                 height={{
                     value : "300px"
                 }}
@@ -83,12 +88,16 @@ function StartingPage(_props) {
             <HeadingBig>Nagłowek duży</HeadingBig>
             <HeadingMedium>Nagłowek średni</HeadingMedium>
             <HeadingSmall>Nagłowek mały</HeadingSmall>
-            <ButtonRoundGreen {...testStartButtonProps}/>
-            <ButtonRoundGreen {...testStartButtonProps2}/>
-            <ButtonRoundGreen {...testStartButtonProps3}/>
+            <ButtonRoundGreen 
+                events={{
+                    onClick: onClickFn
+                }}
+                toggleable = {false}
+                initialToggleState = {false}
 
-            <ButtonRoundGreen {...testStartButtonProps2}/>
-            <ButtonRoundGreen {...testStartButtonProps}/>
+            >
+                Tekst dla przycisku
+            </ButtonRoundGreen>
             
             <RedRoundButton {...dummyToggleRed}/>
             <button onClick={() => navigateToTest(nav)}>Hi</button>
@@ -97,9 +106,7 @@ function StartingPage(_props) {
             <CategoryDescription data = {{heading : null, content : [lorem,lorem]}}/>
             <Container
                 textAlign = "right"
-                padding= {{
-                    padding : 10 
-                }}
+                padding= "10px"
                 maxWidth = {{
                     value :100 
                 }}
@@ -109,6 +116,22 @@ function StartingPage(_props) {
             >
                 tekst w kontenerze</Container>
             <Container>tekst w kontenerze 2</Container>
+            <ExpandableContainer
+                width ={{
+                    value : "fit-content"
+                }}
+                before = "to jest tekst wczesniej"
+                after = "to jest tekst potem"
+                margin= "20px auto"
+                padding = "20px"
+                expandDirection= "topdown"
+                expandableContainerProps={{
+                    margin: "20px 0",
+                    maxHeight : "500px"
+                }}
+            >
+                {lorem}
+            </ExpandableContainer>
         </div>
     )
 }

@@ -1,5 +1,5 @@
-import { ContainerProps, DisplayTypes, Float, FontProps, FontStyles, Positions, Colors, TextAligments, BorderProps, MarginProps, PaddingProps, Position, DimenisionProps, ExpandbleContainerProps } from "../common/types.ts";
-import { BORDER_STYLE, COLOR, DISPLAY, FLOAT, FONT_SIZE, FONT_STYLE, FONT_WEIGHT, POSITION, TEXT_ALIGN } from "../common/classes_constants.js";
+import { ContainerProps, DisplayTypes, Float, FontProps, Colors, TextAligments, BorderProps, MarginProps, PaddingProps, Position, DimenisionProps, ExpandbleContainerProps, PositionCoords, CircleProps, ButtonProps } from "../common/types.ts";
+import { BORDER_STYLE, COLOR, DISPLAY, FLOAT, FONT, FONT_SIZE, FONT_STYLE, FONT_WEIGHT, POSITION, TEXT_ALIGN } from "../common/classes_constants.js";
 import { CSSProperties, PropsWithChildren } from "react";
 
 function parseTextAlign(textAligment? : TextAligments): string[] | [] {
@@ -35,9 +35,6 @@ function parseTextAlign(textAligment? : TextAligments): string[] | [] {
      if(font){
          if(font.color && !isNumberType(font.color))
             classList.push(COLOR[font.color])
-         if(font.font){
- 
-         }
          if(font.size && !isNumberType(font.size)){
             classList.push(FONT_SIZE[font.size])
          } 
@@ -45,19 +42,29 @@ function parseTextAlign(textAligment? : TextAligments): string[] | [] {
              classList.push(FONT_STYLE[font.style])
          }
          if(font.weight && !isNumberType(font.weight)) classList.push(FONT_WEIGHT[font.weight])
+
+        if(font.family){
+            classList.push(FONT[font.family])
+        }
          
      }
      return classList
  }
  
- function parseBackgroud(background?: Colors): string | [] {
-     if(background && !isNumberType(background)) return COLOR[background]+"-bg"
+ function parseBackgroud(background?: Colors): string[] | [] {
+     if(background && !isNumberType(background)) return [COLOR[background]+"-bg"]
      return []
  }
- function isNumberType(type : any){
-     if( type == undefined) return false
-     return typeof type === "number"
+ function isNumberType(type : any | number){
+     return isType(type, "number")
  }
+function isStringType(type : any | string){
+    return isType(type, "string")
+}
+function isType(value : any,type : string) {
+    if (type === undefined) return false
+    if(typeof value === type) return true; return false
+}
 
 export function generateContainerClasses(props : PropsWithChildren<ContainerProps>) : string {
 
@@ -96,6 +103,8 @@ export function generateContainerInlineStyle(props : PropsWithChildren<Container
     parseInlinePadding(style,props.padding)
     parseInlinePosition(style,props.position)
     parseInlineWidth(style,props.width)
+    parseInlineMaxWidth(style, props.maxWidth)
+    parseInlineMaxHeight(style,props.maxHeight)
     
     
 
@@ -114,23 +123,30 @@ function parseInlineBackground(style : React.CSSProperties, background? : Colors
         style.background = hex
     }
 }
-function parseInlineBorder( style : CSSProperties, border? : BorderProps) {
+function parseInlineBorder( style : CSSProperties, border? : BorderProps | string) {
     if(border){
-        if(border.color){
-            let color : string;
-            if (isNumberType(border.color)){
-                color = "#"+border.color.toString(16).padStart(6,"0")
+        if(isStringType(border)){
+            style.border = border as string
+        }
+        else {
+            border = border as BorderProps
+            if(border.color){
+                let color : string;
+                if (isNumberType(border.color)){
+                    color = "#"+border.color.toString(16).padStart(6,"0")
+                }
+                else color = "var(--"+COLOR[border.color]+")"
+                style.borderColor = color
             }
-            else color = "var(--"+COLOR[border.color]+")"
-            style.borderColor = color
+            if(border.style){
+                style.borderStyle = BORDER_STYLE[border.style]
+            }
+            if(border.radius){
+                style.borderRadius = border.radius+ "px"
+            }
+            if(border.width) style.borderWidth = border.width+"px"
         }
-        if(border.style){
-            style.borderStyle = BORDER_STYLE[border.style]
-        }
-        if(border.radius){
-            style.borderRadius = border.radius+ "px"
-        }
-        if(border.width) style.borderWidth = border.width+"px"
+        
     }
 }
 function parseInlineFont(style : CSSProperties, font? : FontProps){
@@ -146,90 +162,219 @@ function parseInlineFont(style : CSSProperties, font? : FontProps){
     }
 }
 
-function parseInlineMargin(style : CSSProperties, margin?: MarginProps){
+function parseInlineMargin(style : CSSProperties, margin?: MarginProps | string){
     if(margin){
-        if(isNumberType(margin.margin)){
-            style.margin = margin.margin + (margin.margin_unit || "px")
+        if(isStringType(margin)){
+            style.margin = margin as string
         }
-        else if (typeof margin.margin === "string"){
-            style.margin = margin.margin
-        }
-        else if (typeof margin.margin === "boolean"){
-            if(margin.margin === true){
-                /* to-do check for unit already in value stirng */
-                if(margin.margin_all?.margin_top)
-                    style.marginTop = margin.margin_all.margin_top + (margin.margin_all.margin_top_unit || "px")
-                if(margin.margin_all?.margin_bottom)
-                    style.marginBottom = margin.margin_all.margin_bottom + (margin.margin_all.margin_bottom_unit || "px")
-                if(margin.margin_all?.margin_left)
-                    style.marginLeft = margin.margin_all.margin_left + (margin.margin_all.margin_left_unit || "px")
-                if(margin.margin_all?.margin_right)
-                    style.marginRight = margin.margin_all.margin_right + (margin.margin_all.margin_right_unit || "px")
+        else{
+            margin = margin as MarginProps
+            if(isNumberType(margin.margin)){
+                style.margin = margin.margin + (margin.margin_unit || "px")
             }
+            else if (typeof margin.margin === "boolean"){
+                if(margin.margin === true){
+                    /* to-do check for unit already in value stirng */
+                    if(margin.margin_all?.margin_top)
+                        style.marginTop = margin.margin_all.margin_top + (margin.margin_all.margin_top_unit || "px")
+                    if(margin.margin_all?.margin_bottom)
+                        style.marginBottom = margin.margin_all.margin_bottom + (margin.margin_all.margin_bottom_unit || "px")
+                    if(margin.margin_all?.margin_left)
+                        style.marginLeft = margin.margin_all.margin_left + (margin.margin_all.margin_left_unit || "px")
+                    if(margin.margin_all?.margin_right)
+                        style.marginRight = margin.margin_all.margin_right + (margin.margin_all.margin_right_unit || "px")
+                }
+            }
+
         }
+        
     }
 }
-function parseInlinePadding(style : CSSProperties, padding?: PaddingProps){
+function parseInlinePadding(style : CSSProperties, padding?: PaddingProps | string){
     if(padding){
-        if(isNumberType(padding.padding)){
-            style.padding = padding.padding + (padding.padding_unit || "px")
+        if(isStringType(padding)){
+            style.padding = padding as string
         }
-        else if (typeof padding.padding === "string"){
-            style.padding = padding.padding
-        }
-        else if (typeof padding.padding === "boolean"){
-            if(padding.padding === true){
-                /* to-do check for unit already in value stirng */
-                if(padding.padding_all?.padding_top)
-                    style.paddingTop = padding.padding_all.padding_top + (padding.padding_all.padding_top_unit || "px")
-                if(padding.padding_all?.padding_bottom)
-                    style.paddingBottom = padding.padding_all.padding_bottom + (padding.padding_all.padding_bottom_unit || "px")
-                if(padding.padding_all?.padding_left)
-                    style.paddingLeft = padding.padding_all.padding_left + (padding.padding_all.padding_left_unit || "px")
-                if(padding.padding_all?.padding_right)
-                    style.paddingRight = padding.padding_all.padding_right + (padding.padding_all.padding_right_unit || "px")
+        else {
+            padding = padding as PaddingProps
+            if(isNumberType(padding.padding)){
+                style.padding = padding.padding + (padding.padding_unit || "px")
+            }
+            else if (typeof padding.padding === "boolean"){
+                if(padding.padding === true){
+                    /* to-do check for unit already in value stirng */
+                    if(padding.padding_all?.padding_top)
+                        style.paddingTop = padding.padding_all.padding_top + (padding.padding_all.padding_top_unit || "px")
+                    if(padding.padding_all?.padding_bottom)
+                        style.paddingBottom = padding.padding_all.padding_bottom + (padding.padding_all.padding_bottom_unit || "px")
+                    if(padding.padding_all?.padding_left)
+                        style.paddingLeft = padding.padding_all.padding_left + (padding.padding_all.padding_left_unit || "px")
+                    if(padding.padding_all?.padding_right)
+                        style.paddingRight = padding.padding_all.padding_right + (padding.padding_all.padding_right_unit || "px")
+                }
             }
         }
+        
     }
 }
 
 function parseInlinePosition(style : CSSProperties, position? : Position){
     if(position?.type){
         if(position.type !== "static"){
-            style.top = position.coords?.top
-            style.bottom = position.coords?.bottom
-            style.left = position.coords?.left
-            style.right = position.coords?.right
+            if(isStringType(position.coords))
+                style.inset = position.coords as string
+            else{
+                position.coords = position.coords as PositionCoords
+                style.top = position.coords?.top
+                style.bottom = position.coords?.bottom
+                style.left = position.coords?.left
+                style.right = position.coords?.right
+            }
+            
         }
     }
 }
-function parseInlineHeight(style : CSSProperties, height? : DimenisionProps){
+function parseInlineHeight(style : CSSProperties, height? : DimenisionProps | string){
 
     if(height){
-        if(isNumberType(height.value)){
-            style.height = height.value+ (height.unit || "px")
+        if(isStringType(height)){
+            style.height = height as string
         }
-        else {
-            style.height = height.value
+        else{
+            height = height as DimenisionProps
+            if(isNumberType(height.value)){
+                style.height = height.value+ (height.unit || "px")
+            }
+            else {
+                style.height = height.value
+            }
         }
+        
     }
 
 }
-function parseInlineWidth(style : CSSProperties, width? : DimenisionProps){
+function parseInlineWidth(style : CSSProperties, width? : DimenisionProps | string){
 
     if(width){
-        if(isNumberType(width.value)){
-            style.width = width.value+ (width.unit || "px")
+        if(isStringType(width)){
+            style.width = width as string
         }
+
         else {
-            style.width = width.value
+            width = width as DimenisionProps
+            if(isNumberType(width.value)){
+                style.width = width.value+ (width.unit || "px")
+            }
+            else {
+                style.width = width.value
+            }
         }
+        
+    }
+    
+}
+function parseInlineMaxHeight(style : CSSProperties, maxHeight? : DimenisionProps | string){
+
+    if(maxHeight){
+        if(isStringType(maxHeight)){
+            style.maxHeight = maxHeight as string
+        }
+        else{
+            maxHeight = maxHeight as DimenisionProps
+            if(isNumberType(maxHeight.value)){
+                style.maxHeight = maxHeight.value+ (maxHeight.unit || "px")
+            }
+            else {
+                style.maxHeight = maxHeight.value
+            }
+        }
+        
+    }
+
+}
+function parseInlineMaxWidth(style : CSSProperties, maxWidth? : DimenisionProps | string){
+
+    if(maxWidth){
+        if(isStringType(maxWidth)){
+            style.maxWidth = maxWidth as string
+        }
+
+        else {
+            maxWidth = maxWidth as DimenisionProps
+            if(isNumberType(maxWidth.value)){
+                style.maxWidth = maxWidth.value+ (maxWidth.unit || "px")
+            }
+            else {
+                style.maxWidth = maxWidth.value
+            }
+        }
+        
     }
     
 }
 
 
 export function generateExpandableContainerClasses(props: PropsWithChildren<ExpandbleContainerProps>): string | undefined {
-    let classes = ["collapsable-container"]
     return "expandable-container " + generateContainerClasses(props)
+}
+
+
+//Circle component class parser 
+
+export function generateCircleClasses(props : CircleProps){
+
+    let classes = ["circle"]
+    if(isStringType(props.backgroundColor)){
+        classes.push(COLOR[props.backgroundColor]+"-bg")
+    }
+    return classes.join(" ")
+
+
+}
+export function generateCircleInlineStyle(props : CircleProps){
+    let style : CSSProperties = {}
+    parseInlineBackground(style,props.backgroundColor)
+    if(isNumberType(props.outlineColor)){
+        let hex = "#"+props.outlineColor?.toString(16).padStart(6,"0")
+        style.borderColor = hex
+    }
+    else{
+        style.borderColor = props.outlineColor as string || "blue"
+    }
+    
+    style.borderWidth = props.width || 1
+    style.height = props.dimensions || 50
+    style.width = props.dimensions || 50
+    return style
+}
+
+// Button
+
+export function generateButtonClasses(props : ButtonProps){
+    let classes = ["button"]
+    console.log(props)
+    if(props.toggleable){
+        classes.push(
+            props.initialToggleState === true ? "toggle" : "notoggle"
+        )
+    }
+    if(props.font){
+
+    }
+    if(props.margin){
+
+    }
+    classes.push(...parseBackgroud(props.background))
+
+    return classes.join(" ")
+
+}
+export function generateButtonInlineStyle(props : ButtonProps){
+    let style : CSSProperties = {}
+    parseInlineBackground(style,props.background)
+    parseInlinePadding(style,props.padding)
+    parseInlineMargin(style,props.margin)
+    parseInlineFont(style,props.font)
+    return style
+
 }
