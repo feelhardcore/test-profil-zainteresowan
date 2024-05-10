@@ -1,6 +1,8 @@
 import { Colors } from "chart.js"
 import { DO_NOT_USE_OR_YOU_WILL_BE_FIRED_EXPERIMENTAL_REACT_NODES, ReactNode, SyntheticEvent } from "react"
-
+export type Children = {
+    children? : ReactNode | string
+}
 export type TextAligments = "center" | "left" | "right" | "justify"
 export type Positions = "static" | "relative" | "sticky" | "absolute" | "fixed" 
 export type Float = "left" | "right"
@@ -154,6 +156,7 @@ export type ExpandBehavior = ""
 export interface ExpandbleContainerProps extends ContainerProps{
     expandDirection : ExpandDirection
     expandBehavior : ExpandBehavior
+    maxHeight : DimenisionProps | string
 } 
 
 // ExpandBar 
@@ -200,11 +203,24 @@ export interface ButtonProps{
     children? : ReactNode | string
 }
 
+//Category desciprion
 
-export interface CategoryDescription{
+export interface CategoryDescriptionProps extends ContainerProps{
     category_name : string
     category_content_before? : ReactNode | string
     category_content_expandable? : ReactNode | string
     category_content_after? : ReactNode | string
 
 }
+
+//Headings
+
+export type HeadingSizes = "small" | "medium" | "big"
+
+export interface HeadingProps extends Children{
+    size : HeadingSizes
+    background? : Colors
+    alignment? : TextAligments
+    font? : FontProps
+}
+export type SizelessHeadingProps = Omit<HeadingProps,"size">

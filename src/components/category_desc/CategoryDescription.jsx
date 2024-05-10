@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import HeadingSmall from "../common/HeadingSmall";
 import { lorem } from "../../common/data/test_content";
 import './index.css'
-import ButtonRoundGreen from "../common/buttons/button_round_green/ButtonRoundGreen";
 import Arrow, { direction } from "../common/Arrow";
 import ExpandBar from "../common/ExpandBar";
 

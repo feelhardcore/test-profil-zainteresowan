@@ -15,10 +15,12 @@
     font-size: var(--heading-medium);
 }
 .heading {
-    padding: 10px;
-    margin: 20px;
+    padding: 10px 0;
+    margin: 20px 0;
     font-weight: bold;
     user-select: none;
+
+    font-family: "Raleway", sans-serif;
     
 }
 /*Circle*/
@@ -63,7 +65,7 @@
     -webkit-transform: rotate(-135deg);
     top: 7px;
     animation-name: arrUp;
-    animation-duration: 500ms;
+    animation-duration: 300ms;
     animation-fill-mode: forwards;
 }
 
@@ -72,7 +74,7 @@
     -webkit-transform: rotate(45deg);
     bottom: 7px;
     animation-name: arrDown;
-    animation-duration: 500ms;
+    animation-duration: 300ms;
     animation-fill-mode: forwards;
 
 }
@@ -186,14 +188,13 @@
 
 
 .expandable{
-    transition-duration: 1500ms;
+    transition-duration: 300ms;
     transition-property: all;
     transition-timing-function: ease-in;
     overflow-y: scroll;
 
 }
 .collapsed{
-    transition-timing-function: cubic-bezier() !important;
     max-height: 0 !important;
     overflow: clip;
 }

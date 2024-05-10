@@ -1,5 +1,5 @@
 import { PropsWithChildren, SyntheticEvent, createRef} from "react";
-import { ExpandbleContainerProps } from "../types";
+import { ExpandbleContainerProps, HTMLProperties } from "../types";
 import React from "react";
 import ExpandBar from "../ExpandBar.tsx";
 import Container from "./Container.tsx";
@@ -16,8 +16,11 @@ export default function ExpandableContainer( props : PropsWithChildren<Expandble
         
     }
 
-
-
+    let htmlProps : HTMLProperties = Object.create(props.htmlProps || {})
+    if(htmlProps.class){
+        htmlProps.class.push("expandable")
+    }
+    else htmlProps.class = ["expandable"]
 
 
     
@@ -26,7 +29,11 @@ export default function ExpandableContainer( props : PropsWithChildren<Expandble
 
     return(
             <>
-            <Container {...props} react={{ref : expandableRef}}>
+            <Container 
+            {...props} 
+            htmlProps={htmlProps}
+            react={{ref : expandableRef}}
+             >
 
                 {props.children}
 

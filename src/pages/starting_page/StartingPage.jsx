@@ -3,7 +3,7 @@ import ButtonRoundGreen from "../../components/common/buttons/button_round_green
 import RedRoundButton from "../../components/common/buttons/RedRoundButton"
 import { buttonProps } from "../../common/scripts/buttonProps.ts"
 import { navigateToTest } from "../../common/scripts/navigate.js"
-import CategoryDescription from "../../components/category_desc/CategoryDescription.jsx"
+import CategoryDescription from "../../components/category_desc/CategoryDescription.tsx"
 import { lorem } from "../../common/data/test_content.js"
 import HeadingBig from "../../components/common/HeadingBig.jsx"
 import HeadingMedium from "../../components/common/HeadingMedium.jsx"
@@ -101,9 +101,6 @@ function StartingPage(_props) {
             
             <RedRoundButton {...dummyToggleRed}/>
             <button onClick={() => navigateToTest(nav)}>Hi</button>
-            <CategoryDescription data = {{heading : null, content : [lorem,lorem]}}/>
-            <CategoryDescription data = {{heading : null, content : [lorem,lorem]}}/>
-            <CategoryDescription data = {{heading : null, content : [lorem,lorem]}}/>
             <Container
                 textAlign = "right"
                 padding= "10px"
@@ -124,6 +121,7 @@ function StartingPage(_props) {
                 after = "to jest tekst potem"
                 margin= "20px auto"
                 padding = "20px"
+                maxHeight="500px"
                 expandDirection= "topdown"
                 expandableContainerProps={{
                     margin: "20px 0",
@@ -132,6 +130,14 @@ function StartingPage(_props) {
             >
                 {lorem}
             </ExpandableContainer>
+            <CategoryDescription
+            category_name="twoj stary"
+            category_content_before = "cos przedtem"
+            category_content_after = "cos potem"
+            category_content_expandable = {lorem}
+            >
+
+            </CategoryDescription>
         </div>
     )
 }

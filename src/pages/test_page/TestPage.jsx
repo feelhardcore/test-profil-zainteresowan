@@ -6,7 +6,7 @@ import {useNavigate} from 'react-router-dom'
 import { navigateToResults } from "../../common/scripts/navigate";
 import QuestionPanel from "../../components/QuestionsPanel/QuestionsPanel";
 import Arrow, { direction } from "../../components/common/Arrow";
-import ButtonRoundGreen from "../../components/common/buttons/button_round_green/ButtonRoundGreen";
+import ButtonRoundGreen from "../../components/common/buttons/button_round_green/ButtonRoundGreen.tsx";
 import Border from "../../components/common/Border.tsx";
 
 export default function TestPage(_props){
@@ -196,7 +196,11 @@ export default function TestPage(_props){
                 <div style={{width : "50%", float : "left"}}><Arrow fn = {moveToPrevPage} lockFacing = {true} facing = {direction.left}/></div>
                 <div style={{width : "50%", float : "right"}}><Arrow fn = {moveToNextPage} lockFacing = {true} facing = {direction.right}/></div>
             </div>
-            <ButtonRoundGreen text = "Sprawdź" fn =  {submit}   ></ButtonRoundGreen>
+            <ButtonRoundGreen 
+                events={{
+                    onClick : submit
+                }}
+            >text</ButtonRoundGreen>
             </div>
         )
 }

@@ -1,4 +1,4 @@
-import { ContainerProps, DisplayTypes, Float, FontProps, Colors, TextAligments, BorderProps, MarginProps, PaddingProps, Position, DimenisionProps, ExpandbleContainerProps, PositionCoords, CircleProps, ButtonProps } from "../common/types.ts";
+import { ContainerProps, DisplayTypes, Float, FontProps, Colors, TextAligments, BorderProps, MarginProps, PaddingProps, Position, DimenisionProps, ExpandbleContainerProps, PositionCoords, CircleProps, ButtonProps, HeadingProps } from "../common/types.ts";
 import { BORDER_STYLE, COLOR, DISPLAY, FLOAT, FONT, FONT_SIZE, FONT_STYLE, FONT_WEIGHT, POSITION, TEXT_ALIGN } from "../common/classes_constants.js";
 import { CSSProperties, PropsWithChildren } from "react";
 
@@ -377,4 +377,28 @@ export function generateButtonInlineStyle(props : ButtonProps){
     parseInlineFont(style,props.font)
     return style
 
+}
+
+// Headings
+
+export function generateHeadingClasses(props : HeadingProps){
+    let classes = ["heading"]
+    switch(props.size)
+    {
+        case "medium" : classes.push("heading-medium"); break;
+        case "big" : classes.push("heading-big"); break;
+        case "small": 
+        default: classes.push("heading-small"); break;
+    }
+    classes.push(...parseTextAlign(props.alignment))
+    classes.push(...parseBackgroud(props.background))
+    classes.push(...parseFont(props.font))
+    return classes.join(" ")
+
+}
+export default function generateHeadingInlineStyle(props : HeadingProps){
+    let style : CSSProperties = {}
+    parseInlineFont(style, props.font)
+    parseInlineBackground(style, props.background)
+    return style
 }

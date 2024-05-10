@@ -59,7 +59,7 @@ export default function Container(props : PropsWithChildren<ContainerProps>)
         return generateContainerInlineStyle(props)
     }
 
-    return(<div onClick={e => props.events?.onClick(e)} ref = {props.react && props.react.ref} id = {props.htmlProps?.id} className= {generateClassNames()} style = {generateInlineStyle()}>
+    return(<div onClick={e => props.events?.onClick?.(e) } ref = {props.react && props.react.ref} id = {props.htmlProps?.id} className= {generateClassNames()} style = {generateInlineStyle()}>
         {props.children}
     </div>)
 

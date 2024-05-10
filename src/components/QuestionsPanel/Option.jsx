@@ -1,5 +1,5 @@
 import { backgrounds } from "../../common/data/colors";
-import Circle from "../common/Circle";
+import Circle from "../common/Circle.jsx";
 
 export default function Option(props)
 {
