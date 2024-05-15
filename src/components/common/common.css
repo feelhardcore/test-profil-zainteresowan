@@ -1,7 +1,14 @@
 @media screen and (max-width : 600px) {
     .heading-small{
-        text-align: center !important; 
+        text-align: center; 
 
+    }
+    .menulist{
+        display: block;
+        margin: auto;
+    }
+    .menulist ul li{
+        text-align: center;
     }
     
 }
@@ -15,7 +22,6 @@
     font-size: var(--heading-medium);
 }
 .heading {
-    padding: 10px 0;
     margin: 20px 0;
     font-weight: bold;
     user-select: none;
@@ -197,4 +203,43 @@
 .collapsed{
     max-height: 0 !important;
     overflow: clip;
+}
+
+footer a{
+    color: inherit
+}
+
+#contact{
+    font-size: var(--small);
+}
+
+@media screen and (max-width: 600px) {
+
+    #bottom-nav{
+        width: 100% !important;
+    }
+    #contact{
+        float: none;
+        margin: auto;
+        width: fit-content !important;
+    }
+    
+}
+
+.menulist ul{
+    padding: 0;
+    list-style-type: none;
+    font-size: var(--small);
+}
+.menulist ul li{
+    margin : 5px 0
+}
+.menulist{
+    vertical-align: top;
+    align-items: start;
+    padding-top: 0 !important;
+}
+.menulist div.heading-small{
+    margin : 0;
+    padding-top: 0;
 }

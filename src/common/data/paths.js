@@ -3,5 +3,6 @@ export const paths = {
     "test_start" : "/start",
     "dummy" : "/dummy",
     "complex" : "/complex/path/to/smth",
-    "results" : "/results"
+    "results" : "/results",
+    "instructions" : "/instructions"
 }

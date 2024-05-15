@@ -1,6 +1,7 @@
 /* font sizes*/
 
 :root{
+    --small: 10pt;
     --standard: 12pt;
     --larger: 14pt;
     --big: 16pt;
@@ -8,7 +9,9 @@
     --heading-medium : 16pt;
     --heading-small : 13pt;
 }
-
+.font-small{
+  font-size: var(--small)
+}
 .font-standard{
     font-size: var(--standard);
 }

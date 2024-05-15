@@ -37,6 +37,7 @@ export const COLOR = {
 }
 
 export const FONT_SIZE = {
+    small : "font-small",
     standard : "font-standard",
     larger : "font-larger",
     big : "font-big",

@@ -71,7 +71,7 @@ export function generateContainerClasses(props : PropsWithChildren<ContainerProp
     let classList : string[] = []
     if(!props) return ""
     console.log(props?.htmlProps)
-    if(props.htmlProps){
+    if(props.htmlProps?.class){
         classList.push(...props.htmlProps?.class as [])
     }
     
@@ -370,7 +370,7 @@ export function generateButtonClasses(props : ButtonProps){
 
 }
 export function generateButtonInlineStyle(props : ButtonProps){
-    let style : CSSProperties = {}
+    let style : CSSProperties = {display : "block"}
     parseInlineBackground(style,props.background)
     parseInlinePadding(style,props.padding)
     parseInlineMargin(style,props.margin)

@@ -1,18 +1,18 @@
 import { Colors } from "chart.js"
-import { DO_NOT_USE_OR_YOU_WILL_BE_FIRED_EXPERIMENTAL_REACT_NODES, ReactNode, SyntheticEvent } from "react"
+import { DO_NOT_USE_OR_YOU_WILL_BE_FIRED_EXPERIMENTAL_REACT_NODES, ReactNode, SyntheticEvent, TransitionEvent } from "react"
 export type Children = {
     children? : ReactNode | string
 }
 export type TextAligments = "center" | "left" | "right" | "justify"
 export type Positions = "static" | "relative" | "sticky" | "absolute" | "fixed" 
 export type Float = "left" | "right"
-export type FontSizes = "standard" | "larger" | "big" | "heading-big" | "heading-small" | "heading-medium" | "heading-big" | number
+export type FontSizes = "small" |"standard" | "larger" | "big" | "heading-big" | "heading-small" | "heading-medium" | "heading-big" | number
 export type Units = "px" | "pt" | "%" | "rem" | "vh" | "cm" | "mm" | "in" | "pc"
 export type FontStyles = "italic" | "oblique"
 export type DisplayTypes = "block" | "inline_block" | "table" | "inline" | "flex"
 export type FontWeights = "normal" | "bold" | "bolder" | number
 export type Fonts = "text"| "text_bold"| "header" | "header_bold"
-export type Colors = "red" | "blue" | "light_gray" | "light_blue" | "light_green" | "green" | "light_yellow" | "yellow" | "white" | number
+export type Colors = "red" | "blue" | "light_gray" | "light_blue" | "light_green" | "green" | "light_yellow" | "yellow" | "white" | "inherit"| number
 export type BorderStyles = "solid" | "dotted" | "dashed"
 export type Paragraph = {
     text : string | string[]
@@ -33,6 +33,39 @@ export interface HTMLProperties{
     inlineCSS? : React.CSSProperties
 }
 
+/**
+ *  Additional callbacks
+ * 
+ *  Allows usage of callbacks in child elements
+ * 
+ *  You can pass any number of callbacks
+ * 
+ *  Accepts any number of parameters
+ * 
+ *  Property name will be name of function to use in child element
+ * 
+ *  @example
+ *   ```js
+ *  <Element callbacks = {{
+ *      callback_name : declared_function_name,
+ *      another_callback_name : another_function
+ *  }}/>
+ * 
+ *  // In Element 
+ * 
+ *  // Calling function
+ *  props.callbacks?.callback_name?.()
+ * 
+ * // Calling function with parameters
+ * 
+ *  props.calllbacks?.callback_name?.(parameter1,parameterN)
+ * ```
+ * 
+ *  
+ */
+export type Callbacks = {
+    [key : string] : Callback<any>
+}
 export interface ContainerProps{
     textAlign? : TextAligments,
     border?: BorderProps | string,
@@ -53,11 +86,15 @@ export interface ContainerProps{
     events? : Events
 
 }
+export type ClickHandler = EventCallback
+export type TransitionEndHandler = (e : TransitionEvent) => void
 export interface Events{
-    onClick?(event : SyntheticEvent) : void
+    onClick? : ClickHandler
+    onTransitionEnd? : TransitionEndHandler
 }
 export interface ReactProps{
     ref? : React.RefObject<any>
+    key? : any
 }
 export interface Position{
     type? : Positions,
@@ -196,8 +233,8 @@ export interface ButtonProps{
     initialToggleState? : boolean
     font? : FontProps,
     background? : Colors
-    padding? : PaddingProps
-    margin? : MarginProps
+    padding? : PaddingProps | string
+    margin? : MarginProps | string
     disabled? : boolean
     shouldHandleDisabled? : boolean
     children? : ReactNode | string
@@ -224,3 +261,48 @@ export interface HeadingProps extends Children{
     font? : FontProps
 }
 export type SizelessHeadingProps = Omit<HeadingProps,"size">
+
+
+// Menu list
+
+export interface MenuListProps{
+    name : string
+    options : MenuOption[]
+}
+
+export type EventCallback = (e : SyntheticEvent) => void
+export type Callback<T> = (...params :any[]) => T 
+export type VoidCallback = Callback<void>
+export interface MenuOption{
+    value: string
+    action: string | null
+    callback? : EventCallback
+}
+
+// Questiions
+
+export type SlideInDirection = "left" | "right"
+
+export interface QuestionPanelProps{
+    question_set : number
+    question_set_next : boolean
+    next_direction? : SlideInDirection
+    events : {
+        onClick : VoidCallback
+        onSlideOut : VoidCallback
+    }
+    current_answers : (number | null)[]
+    callbacks? : Callbacks
+    
+}
+export interface QuestionProps{
+    question_number : number,
+    next_set : boolean,
+    current_answer : number | null
+    slideInDirection : SlideInDirection,
+    events : {
+        onClick : VoidCallback
+        onSlideOut? : VoidCallback
+    }
+
+}

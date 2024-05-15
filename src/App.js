@@ -13,6 +13,7 @@ import './common/css/display.css'
 import './common/css/position.css'
 import './common/css/text-align.css'
 import './common/css/float.css'
+import Instructions from './pages/Instructions.tsx';
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
     <div className = 'main'>
       <Routes>
         <Route path = '/' element = {<StartingPage/>} />
+
+        <Route path = '/instructions' element = {<Instructions/>} />
 
         <Route path = '/start' element = {<TestPage/>}/>
 

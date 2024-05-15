@@ -6,11 +6,14 @@ export function navigateToHome(navhook){
 }
 
 
-export function navigateToTest(navhook){
+export function navigateToTest(){
     navigate(paths.test_start)
 
 }
 
+export function navigateToInstructions(){
+    navigate(paths.instructions)
+}
 export function navigateToResults(results){
     navigate(paths.results,results)
 }

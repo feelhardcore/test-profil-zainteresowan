@@ -25,6 +25,7 @@ export default function Question(props){
     }
 
     const onTransitionEnd = e => {
+        console.log(e)
         if(nextSet){
             if(number %10 === 9 && e.propertyName === "transform") {
                 props.onSlideOut()
