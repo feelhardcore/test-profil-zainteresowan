@@ -5,6 +5,7 @@ import Option from "./Option"
 import { QuestionProps } from "../common/types.ts"
 import Container from "../common/containers/Container.tsx"
 import React from "react"
+import { generateQuestionClasses, generateQuestionStyle } from "../common/propParser.ts"
 
 export default function Question(props : QuestionProps){
     const number = props.question_number
@@ -30,8 +31,10 @@ export default function Question(props : QuestionProps){
     }
 
     const onTransitionEnd = (e : TransitionEvent) => {
+        console.log("transiitob end")
         if(nextSet){
             if(number %10 === 9 && e.propertyName === "transform") {
+                console.log("???")
                 onSlideOut?.()
             }
         }
@@ -50,6 +53,7 @@ export default function Question(props : QuestionProps){
 
     useEffect(() => {
         if(nextSet == true){
+            console.log("next set triggered")
             divRef.current?.classList.toggle("slide-in", false)
             divRef.current?.classList.toggle(
                 direction === "left" ? "slide-out-left" : "slide-out-right", true
@@ -74,6 +78,7 @@ export default function Question(props : QuestionProps){
 
 
     const triggerSlideIn = () => {
+        console.log(divRef.current)
         divRef.current?.classList.toggle("slide-in", true)
     }
     
@@ -84,12 +89,13 @@ export default function Question(props : QuestionProps){
         }}
         htmlProps={
             {
-                class : ["question", "question-from-left"]
+                class : [generateQuestionClasses(props)]
             }
         }
         events={{
             onTransitionEnd : onTransitionEnd
         }}
+        style={generateQuestionStyle(props)}
         >
             <Option answerHook = {() => selectAnswer(0)} selected = {selected === 0}>{questionData.option1}</Option>
             <Option answerHook = {() => selectAnswer(1)} selected = {selected === 1}>{questionData.option2}</Option>

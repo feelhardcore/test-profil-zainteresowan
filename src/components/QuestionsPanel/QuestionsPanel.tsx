@@ -18,9 +18,11 @@ export default function QuestionPanel(props : QuestionPanelProps){
     const answerHook = props.events.onClick
 
     const currentAnswers = props.current_answers
+    console.log(currentAnswers)
 
     useEffect(() => {
         console.log(props.callbacks?.sum?.(69,1))
+         document.getElementById("root")?.scrollIntoView({block : "start", behavior : "smooth"})
     })
 
     return (
@@ -34,7 +36,7 @@ export default function QuestionPanel(props : QuestionPanelProps){
             }}
 
         >
-            {currentAnswers.map((value,index) => {
+            {props.current_answers.map((value,index) => {
                 return <Question 
                     events= {props.events}
                     next_set = {nextSet} 

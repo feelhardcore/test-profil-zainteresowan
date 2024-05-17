@@ -1,5 +1,5 @@
 import { Colors } from "chart.js"
-import { DO_NOT_USE_OR_YOU_WILL_BE_FIRED_EXPERIMENTAL_REACT_NODES, ReactNode, SyntheticEvent, TransitionEvent } from "react"
+import { CSSProperties, DO_NOT_USE_OR_YOU_WILL_BE_FIRED_EXPERIMENTAL_REACT_NODES, ReactNode, SyntheticEvent, TransitionEvent } from "react"
 export type Children = {
     children? : ReactNode | string
 }
@@ -84,6 +84,7 @@ export interface ContainerProps{
     maxHeight? : DimenisionProps | string
     react? : ReactProps
     events? : Events
+    style? : CSSProperties
 
 }
 export type ClickHandler = EventCallback
@@ -305,4 +306,18 @@ export interface QuestionProps{
         onSlideOut? : VoidCallback
     }
 
+}
+
+export interface TestNavBarProps{
+    buttons_events: {
+        left_button : EventCallback,
+        right_button : EventCallback,
+        submit_button : EventCallback
+    }
+    buttons_enabled: {
+        left_button : boolean
+        right_button : boolean
+        submit_button : boolean
+    }
+    
 }

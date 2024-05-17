@@ -4,10 +4,11 @@ import TestQuestion from "../../components/TestQuestion/TestQuestion";
 import './TestPage_styles.css'
 import {useNavigate} from 'react-router-dom'
 import { navigateToResults } from "../../common/scripts/navigate";
-import QuestionPanel from "../../components/QuestionsPanel/QuestionsPanel";
+import QuestionPanel from "../../components/QuestionsPanel/QuestionsPanel.tsx";
 import Arrow, { direction } from "../../components/common/Arrow";
 import ButtonRoundGreen from "../../components/common/buttons/button_round_green/ButtonRoundGreen.tsx";
 import Border from "../../components/common/Border.tsx";
+import TestNavBar from "../../components/common/TestNavBar.tsx";
 
 export default function TestPage(_props){
 
@@ -160,17 +161,19 @@ export default function TestPage(_props){
 
     const moveToNextPage = () => {
         setNextPage(set => set+1)
-        setNextDirection(false)
+        setNextDirection("right")
         slideOutQuestions()
     }
     const moveToPrevPage = () => {
         setNextPage(set => set-1)
-        setNextDirection(true)
+        setNextDirection("left")
         slideOutQuestions()
     }
 
 
     const getCurrentAnswersForSet = () => {
+        console.log("costma xd")
+        console.log(answerMatrix.current[set])
         return answerMatrix.current[set]
     }
     
@@ -180,17 +183,17 @@ export default function TestPage(_props){
         <div className="test-main">
 
             <TestHeader/>
-            <QuestionPanel 
-                answerHook = {answerHook}
-                onSlideOut = {() => onSlideOut()} 
-                nextSet = {nextSet} 
-                nextDirection = {nextDirection}
-                questionSet = {set}
-                currentAnswers = {getCurrentAnswersForSet()}
-                >
-            </QuestionPanel>
-
-            <Border>cos tam</Border>
+            <QuestionPanel
+                question_set={set}
+                events={{
+                    onSlideOut : onSlideOut,
+                    onClick : answerHook
+                }}
+                question_set_next = {nextSet}
+                next_direction= {nextDirection}
+                current_answers={getCurrentAnswersForSet()}
+            />
+            <TestNavBar></TestNavBar>
             <div style = {{display : "inline-block", width: "100%", userSelect : "none"}}>
         
                 <div style={{width : "50%", float : "left"}}><Arrow fn = {moveToPrevPage} lockFacing = {true} facing = {direction.left}/></div>

@@ -130,8 +130,9 @@
     border-radius: 10px;
     overflow: hidden;
     padding: 10px;
-    margin: 10px;
+    margin: 10px auto;
     opacity: 0;
+    max-width: 500px;
     display: flex;
 }
 
@@ -242,4 +243,13 @@ footer a{
 .menulist div.heading-small{
     margin : 0;
     padding-top: 0;
+}
+
+.testnavbar-element{
+    display: inline-block;
+    vertical-align: middle;
+    margin: 20px !important;
+}
+.testnavbar{
+    margin: auto
 }

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { test_content } from "../../common/data/test_content"
 import { useRef } from "react"
 import Option from "./Option"
+import { generateQuestionClasses } from "../common/propParser.ts"
 
 export default function Question(props){
     const number = props.number

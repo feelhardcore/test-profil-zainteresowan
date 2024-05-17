@@ -1,4 +1,4 @@
-import { ContainerProps, DisplayTypes, Float, FontProps, Colors, TextAligments, BorderProps, MarginProps, PaddingProps, Position, DimenisionProps, ExpandbleContainerProps, PositionCoords, CircleProps, ButtonProps, HeadingProps } from "../common/types.ts";
+import { ContainerProps, DisplayTypes, Float, FontProps, Colors, TextAligments, BorderProps, MarginProps, PaddingProps, Position, DimenisionProps, ExpandbleContainerProps, PositionCoords, CircleProps, ButtonProps, HeadingProps, QuestionProps } from "../common/types.ts";
 import { BORDER_STYLE, COLOR, DISPLAY, FLOAT, FONT, FONT_SIZE, FONT_STYLE, FONT_WEIGHT, POSITION, TEXT_ALIGN } from "../common/classes_constants.js";
 import { CSSProperties, PropsWithChildren } from "react";
 
@@ -92,6 +92,7 @@ export function generateContainerClasses(props : PropsWithChildren<ContainerProp
 
 export function generateContainerInlineStyle(props : PropsWithChildren<ContainerProps>): React.CSSProperties | undefined {
     let style : React.CSSProperties = {} 
+    if(props.style) return props.style
 
     
     
@@ -401,4 +402,27 @@ export default function generateHeadingInlineStyle(props : HeadingProps){
     parseInlineFont(style, props.font)
     parseInlineBackground(style, props.background)
     return style
+}
+
+
+// Questions
+
+export function generateQuestionClasses(props : QuestionProps) {
+    let classes = ["question"]
+    if(!props.next_set)
+    classes.push(props.slideInDirection ? "question-from-left" : "question-from-right")
+    return classes.join(" ")
+}
+
+export function generateQuestionStyle(props : QuestionProps) : CSSProperties
+{
+    return {
+        transitionProperty: "all", 
+        transitionDuration: "0.5s", 
+        transitionTimingFunction: "ease", 
+        transitionDelay: animationDelay(props.question_number)   
+    }
+}
+function animationDelay(question_number){
+    return (0.05*(question_number%10))+"s"
 }
