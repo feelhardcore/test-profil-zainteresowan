@@ -18,9 +18,9 @@ export default function ExpandableContainer( props : PropsWithChildren<Expandble
 
     let htmlProps : HTMLProperties = Object.create(props.htmlProps || {})
     if(htmlProps.class){
-        htmlProps.class.push("expandable")
+        htmlProps.class.push("expandable collapsed")
     }
-    else htmlProps.class = ["expandable"]
+    else htmlProps.class = ["expandable collapsed"]
 
 
     

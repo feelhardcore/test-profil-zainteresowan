@@ -9,6 +9,8 @@ import Arrow, { direction } from "../../components/common/Arrow";
 import ButtonRoundGreen from "../../components/common/buttons/button_round_green/ButtonRoundGreen.tsx";
 import Border from "../../components/common/Border.tsx";
 import TestNavBar from "../../components/common/TestNavBar.tsx";
+import { popup } from "../../App.js";
+import { popup_types } from "../../common/data/popup_types.js";
 
 export default function TestPage(_props){
 
@@ -39,16 +41,39 @@ export default function TestPage(_props){
     const [testCompleted,setTestCompleted] = useState(false)
     const [set,setSet] = useState(0)
     const [nextSet, setNextSet] = useState(false)
-    const [nextPage,setNextPage] = useState(1)
+    const [nextPage,setNextPage] = useState(0)
     const [nextDirection, setNextDirection] = useState(false)
 
-    const setFinished = useRef(false)
+    const [missingAnswers,setMissing] =  useState(Array(10).fill(false))
+    const [lockSlide, setLockSlide] = useState(false)
+
 
     
 
     const answerHook = (questionNumber,option) => {
         answerMatrix.current[set][questionNumber%10] = option
 
+    }
+
+    const markUnansweredQuestions = () => {
+        let current_answers = answerMatrix.current[set]
+        let missing_set = Array(10).fill(false)
+        let missingFound = false;
+        for(let i = 0; i< current_answers.length; i++){
+            if(current_answers[i] === null){
+                missing_set[i] = true
+                missingFound = true;
+            }
+            
+        }
+        setLockSlide(missingFound)
+        setMissing(missing_set)
+            
+        return missingFound;
+    }
+
+    const warnUnansweredQuestions = () => {
+        popup.show(popup_types.warn,"Proszę zaznaczyć odpowiedź w każdym pytaniu", 2)
     }
 
     const checkForAnsweredQuestion = () => {
@@ -104,21 +129,18 @@ export default function TestPage(_props){
     }
 
     const submit = () => {
-        c('/results',{ replace : false, state : {data : {
-            results : calculateResults(answerMatrix.current),
-            answers : answerMatrix.current
-        }}})
+        submitOverride();return
+        c('/results',{ replace : false, state : {
+            results : calculateResults(answerMatrix.current)
+        }})
     }
     const submitOverride = () => {
-        let array= new Array(10)
+        let array= new Array(100)
         .fill(0)
-        .map(_e=>(new Array(10))
-        .fill(0)
-        .map(_e=> Math.random()<0.7?0:1))
-        navigateToResults({ replace : false, state : {data : {
-            results : calculateResults(array),
-            answers : array
-        }}})
+        .map(_e=> Math.random()<0.7?0:1)
+        navigateToResults({ replace : false, state : {
+            results : array
+        }})
     }
 
     const toggleAutoAdvance = () => {
@@ -153,6 +175,8 @@ export default function TestPage(_props){
     }
 
 
+
+
     const setAnswer = (questionNumber, value) => {
         let matrixX = questionNumber / 10 
         let matrixY = questionNumber % 10
@@ -160,6 +184,11 @@ export default function TestPage(_props){
     }
 
     const moveToNextPage = () => {
+        console.log("nextpagetrigger")
+        if(markUnansweredQuestions()){
+            warnUnansweredQuestions()
+            return
+        }
         setNextPage(set => set+1)
         setNextDirection("right")
         slideOutQuestions()
@@ -172,7 +201,6 @@ export default function TestPage(_props){
 
 
     const getCurrentAnswersForSet = () => {
-        console.log("costma xd")
         console.log(answerMatrix.current[set])
         return answerMatrix.current[set]
     }
@@ -184,6 +212,7 @@ export default function TestPage(_props){
 
             <TestHeader/>
             <QuestionPanel
+                lock_slide = {lockSlide}
                 question_set={set}
                 events={{
                     onSlideOut : onSlideOut,
@@ -191,9 +220,22 @@ export default function TestPage(_props){
                 }}
                 question_set_next = {nextSet}
                 next_direction= {nextDirection}
+                missing_answers={missingAnswers}
                 current_answers={getCurrentAnswersForSet()}
             />
-            <TestNavBar></TestNavBar>
+            <TestNavBar buttons_events={{
+                left_button : moveToPrevPage,
+                right_button : moveToNextPage,
+                submit_button : submit
+            }}
+            buttons_enabled={{
+                left_button : set !== 0,
+                right_button : set !== 9,
+                submit_button : testCompleted
+            }}
+            
+                
+            ></TestNavBar>
             <div style = {{display : "inline-block", width: "100%", userSelect : "none"}}>
         
                 <div style={{width : "50%", float : "left"}}><Arrow fn = {moveToPrevPage} lockFacing = {true} facing = {direction.left}/></div>

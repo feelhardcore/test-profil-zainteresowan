@@ -23,6 +23,8 @@ export default function Question(props : QuestionProps){
     const answerHook = props.events.onClick
 
     const onSlideOut = props.events.onSlideOut
+
+
     
 
     const animationDelay = () =>{
@@ -31,10 +33,8 @@ export default function Question(props : QuestionProps){
     }
 
     const onTransitionEnd = (e : TransitionEvent) => {
-        console.log("transiitob end")
         if(nextSet){
             if(number %10 === 9 && e.propertyName === "transform") {
-                console.log("???")
                 onSlideOut?.()
             }
         }
@@ -59,7 +59,12 @@ export default function Question(props : QuestionProps){
                 direction === "left" ? "slide-out-left" : "slide-out-right", true
             )
         }
-        else setTimeout(triggerSlideIn,50)
+        else 
+        {
+            setSelected(currentAnswer)
+            setTimeout(triggerSlideIn,150)
+        }
+        
 
     },[nextSet])
 
@@ -78,8 +83,8 @@ export default function Question(props : QuestionProps){
 
 
     const triggerSlideIn = () => {
-        console.log(divRef.current)
         divRef.current?.classList.toggle("slide-in", true)
+        console.log(`Current answer for ${number} is ${currentAnswer}`)
     }
     
 

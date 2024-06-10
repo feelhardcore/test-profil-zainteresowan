@@ -1,4 +1,4 @@
-import { ContainerProps, DisplayTypes, Float, FontProps, Colors, TextAligments, BorderProps, MarginProps, PaddingProps, Position, DimenisionProps, ExpandbleContainerProps, PositionCoords, CircleProps, ButtonProps, HeadingProps, QuestionProps } from "../common/types.ts";
+import { ContainerProps, DisplayTypes, Float, FontProps, Colors, TextAligments, BorderProps, MarginProps, PaddingProps, Position, DimenisionProps, ExpandbleContainerProps, PositionCoords, CircleProps, ButtonProps, HeadingProps, QuestionProps, SlidingQuestion, SlidingQuestionProps, SingleChoiceQuestionProps } from "../common/types.ts";
 import { BORDER_STYLE, COLOR, DISPLAY, FLOAT, FONT, FONT_SIZE, FONT_STYLE, FONT_WEIGHT, POSITION, TEXT_ALIGN } from "../common/classes_constants.js";
 import { CSSProperties, PropsWithChildren } from "react";
 
@@ -11,7 +11,6 @@ function parseTextAlign(textAligment? : TextAligments): string[] | [] {
  }
  function parseDisplayType(display?: DisplayTypes): string[] | [] {
      if(display){
-        console.log(display)
          return [DISPLAY[display]]
     }
     return []
@@ -70,7 +69,6 @@ export function generateContainerClasses(props : PropsWithChildren<ContainerProp
 
     let classList : string[] = []
     if(!props) return ""
-    console.log(props?.htmlProps)
     if(props.htmlProps?.class){
         classList.push(...props.htmlProps?.class as [])
     }
@@ -81,7 +79,6 @@ export function generateContainerClasses(props : PropsWithChildren<ContainerProp
     classList.push(...parseFloatDirection(props.float))
     classList.push(...parseFont(props.font))
     classList.push(...parseBackgroud(props.background))
-    console.log(classList)
         
 
 
@@ -106,14 +103,6 @@ export function generateContainerInlineStyle(props : PropsWithChildren<Container
     parseInlineWidth(style,props.width)
     parseInlineMaxWidth(style, props.maxWidth)
     parseInlineMaxHeight(style,props.maxHeight)
-    
-    
-
-
-    
-    
-    
-    console.log(style)
 
     return style
 }
@@ -353,7 +342,6 @@ export function generateCircleInlineStyle(props : CircleProps){
 
 export function generateButtonClasses(props : ButtonProps){
     let classes = ["button"]
-    console.log(props)
     if(props.toggleable){
         classes.push(
             props.initialToggleState === true ? "toggle" : "notoggle"
@@ -410,8 +398,32 @@ export default function generateHeadingInlineStyle(props : HeadingProps){
 export function generateQuestionClasses(props : QuestionProps) {
     let classes = ["question"]
     if(!props.next_set)
+    if(!props.lock_slide)
     classes.push(props.slideInDirection ? "question-from-left" : "question-from-right")
+    else classes.push("immovable")
+    if(props.missing_answer) classes.push("missing-answer")
     return classes.join(" ")
+}
+
+export function generateSingleChoiceQuestionClasses(props : SingleChoiceQuestionProps) {
+    let classes = ["question"]
+    return classes.join(" ")
+}
+
+export function generateSlidingQuestionClasses(props : SlidingQuestionProps,state : number){
+
+    let classes = ["question"]
+    if(state = 0){
+        classes.push(props.slide_direction === "left" ? "question-from-left" : "question-from-right")
+    }
+    else if (state = 1){
+        classes.push("question-static")
+    }
+    else if( state = 2){
+        classes.push(props.slide_direction === "left" ? "slide-out-left" : "slide-out-right")
+    }
+    return classes.join(" ")
+
 }
 
 export function generateQuestionStyle(props : QuestionProps) : CSSProperties

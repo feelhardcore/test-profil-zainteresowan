@@ -1,10 +1,11 @@
+import { useEffect, useState } from "react";
 import { backgrounds } from "../../common/data/colors";
 import Circle from "../common/Circle.jsx";
 
 export default function Option(props)
 {
 
-    const selected = props.selected || false
+    const selected = props.selected
 
     const hook = props.answerHook
     return (

@@ -14,6 +14,7 @@ import './common/css/position.css'
 import './common/css/text-align.css'
 import './common/css/float.css'
 import Instructions from './pages/Instructions.tsx';
+import ResultsPage from './pages/interestsprofiletest/ResultsPage.tsx';
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
 
         <Route path = '/start' element = {<TestPage/>}/>
 
-        <Route path = "/results" element = {<TestResult/>}/>
+        <Route path = "/results" element = {<ResultsPage/>}/>
         
 
         <Route path = '*' element = {<Page404/>}/>
@@ -45,7 +46,10 @@ function App() {
 export default App;
 
 export const popup = {
-  show: () => {}
+  /**
+   * Usage (type,text,duration)
+   */
+  show: (type,text,duration) => {}
 }
 export const navigate = {
   hook : () => {},

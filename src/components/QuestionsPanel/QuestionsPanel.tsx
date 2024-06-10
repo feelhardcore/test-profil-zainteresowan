@@ -18,11 +18,13 @@ export default function QuestionPanel(props : QuestionPanelProps){
     const answerHook = props.events.onClick
 
     const currentAnswers = props.current_answers
-    console.log(currentAnswers)
+
+    const missing_answers = props.missing_answers
+
 
     useEffect(() => {
-        console.log(props.callbacks?.sum?.(69,1))
          document.getElementById("root")?.scrollIntoView({block : "start", behavior : "smooth"})
+         console.log(props.current_answers)
     })
 
     return (
@@ -37,12 +39,14 @@ export default function QuestionPanel(props : QuestionPanelProps){
 
         >
             {props.current_answers.map((value,index) => {
-                return <Question 
+                return <Question
+                    lock_slide = {props.lock_slide}
                     events= {props.events}
                     next_set = {nextSet} 
                     slideInDirection = {direction} 
                     question_number = {questionSet*10+index}
                     current_answer = {value}
+                    missing_answer = {missing_answers?.[index]}
                 />
                 })
             }
