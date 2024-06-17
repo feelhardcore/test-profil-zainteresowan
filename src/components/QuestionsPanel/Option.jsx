@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { backgrounds } from "../../common/data/colors";
-import Circle from "../common/Circle.jsx";
+import Circle from "../../react/common/components/circle/Circle.tsx";
 
 export default function Option(props)
 {

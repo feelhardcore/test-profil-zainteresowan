@@ -1,9 +1,9 @@
 import { useEffect } from "react"
 import TestQuestion from "../TestQuestion/TestQuestion"
 import Question from "./Question.tsx"
-import { QuestionPanelProps } from "../common/types.ts"
+import { QuestionPanelProps } from "../../react/types/types.ts"
 import React from "react"
-import Container from "../common/containers/Container.tsx"
+import Container from "../../react/common/components/containers/Container.tsx"
 
 export default function QuestionPanel(props : QuestionPanelProps){
 

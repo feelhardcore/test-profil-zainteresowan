@@ -1,13 +1,13 @@
 import React from "react";
-import Container from "../../components/common/containers/Container.tsx";
-import { InterestsTestResultsPageProps } from "../../components/common/types";
+import Container from "../../react/common/components/containers/Container.tsx";
+import { InterestsTestResultsPageProps } from "../../react/types/types.ts";
 import { test_content_categories } from "../../common/data/test_content";
 import { useLocation } from "react-router";
 import { backgrounds, colors } from "../../common/data/colors.js";
-import HeadingMedium from "../../components/common/HeadingMedium.jsx";
-import ClearFix from "../../components/common/ClearFix.tsx";
+import ClearFix from "../../react/common/components/clearfix/ClearFix.tsx";
 import { Bar, ChartProps } from "react-chartjs-2";
 import { ChartData, ChartOptions } from "chart.js";
+import HeadingMedium from "../../react/common/components/heading/HeadingMedium.tsx";
 
 export default function ResultsPage(props : InterestsTestResultsPageProps){
 

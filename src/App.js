@@ -8,11 +8,12 @@ import Header from './components/header/Header';
 import InfoPopup from './components/popup/Popup';
 import './common/css/colors.css'
 import './common/css/fonts.css'
-import Footer from './components/footer/Footer';
+import './components/common/common.css'
 import './common/css/display.css'
 import './common/css/position.css'
 import './common/css/text-align.css'
 import './common/css/float.css'
+import Footer from './react/common/components/static-page-elements/footer/Footer.tsx';
 import Instructions from './pages/Instructions.tsx';
 import ResultsPage from './pages/interestsprofiletest/ResultsPage.tsx';
 

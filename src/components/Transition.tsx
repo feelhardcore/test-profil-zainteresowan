@@ -1,5 +1,5 @@
 import { ReactNode, TransitionEvent, createRef, useEffect, useRef, useState } from "react";
-import { TransitionProps } from "./common/types.ts";
+import { TransitionProps } from "../react/types/types.ts";
 import React from "react";
 
 export default function Transition(props : TransitionProps){

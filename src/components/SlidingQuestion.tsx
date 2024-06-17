@@ -1,9 +1,9 @@
 import React, { TransitionEvent, createRef, useEffect, useState } from "react";
 import Question from "./QuestionsPanel/Question.tsx";
 import Option from "./QuestionsPanel/Option.jsx";
-import { SlidingQuestionProps } from "./common/types";
-import Container from "./common/containers/Container.tsx";
-import { generateQuestionClasses, generateQuestionStyle, generateSlidingQuestionClasses } from "./common/propParser.ts";
+import { SlidingQuestionProps } from "../react/types/types.ts";
+import Container from "../react/common/components/containers/Container.tsx";
+import { generateQuestionClasses, generateQuestionStyle, generateSlidingQuestionClasses } from "../react/common/scripts/propsParser.ts";
 import { test_content } from "../common/data/test_content.js";
 
 export default function SlidingQuestion(props : SlidingQuestionProps){

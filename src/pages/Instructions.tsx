@@ -1,7 +1,7 @@
 import React, { SyntheticEvent } from "react";
-import Container from "../components/common/containers/Container.tsx";
+import Container from "../react/common/components/containers/Container.tsx";
 import HeadingMedium from "../components/ts/HeadingMedium.tsx";
-import ButtonRoundGreen from "../components/common/buttons/button_round_green/ButtonRoundGreen.tsx";
+import ButtonRoundGreen from "../react/common/components/button/ButtonRoundGreen.tsx";
 import { navigateToTest } from "../common/scripts/navigate";
 
 export default function Instructions(_ : any){

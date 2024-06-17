@@ -1,14 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import TestHeader from "../../components/test_header/TestHeader";
-import TestQuestion from "../../components/TestQuestion/TestQuestion";
 import './TestPage_styles.css'
 import {useNavigate} from 'react-router-dom'
 import { navigateToResults } from "../../common/scripts/navigate";
 import QuestionPanel from "../../components/QuestionsPanel/QuestionsPanel.tsx";
-import Arrow, { direction } from "../../components/common/Arrow";
-import ButtonRoundGreen from "../../components/common/buttons/button_round_green/ButtonRoundGreen.tsx";
-import Border from "../../components/common/Border.tsx";
-import TestNavBar from "../../components/common/TestNavBar.tsx";
+import Arrow, { direction } from "../../react/common/components/arrow/Arrow.tsx";
+import ButtonRoundGreen from "../../react/common/components/button/ButtonRoundGreen.tsx";
+import TestNavBar from "../../react/common/components/test-components/test-nav/TestNavBar.tsx";
 import { popup } from "../../App.js";
 import { popup_types } from "../../common/data/popup_types.js";
 

@@ -2,10 +2,10 @@ import { SyntheticEvent, TransitionEvent, TransitionEventHandler, createRef, use
 import { test_content } from "../../common/data/test_content"
 import { useRef } from "react"
 import Option from "./Option"
-import { QuestionProps } from "../common/types.ts"
-import Container from "../common/containers/Container.tsx"
+import { QuestionProps } from "../../react/types/types.ts"
+import Container from "../../react/common/components/containers/Container.tsx"
 import React from "react"
-import { generateQuestionClasses, generateQuestionStyle } from "../common/propParser.ts"
+import { generateQuestionClasses, generateQuestionStyle } from "../../react/common/scripts/propsParser.ts"
 
 export default function Question(props : QuestionProps){
     const number = props.question_number

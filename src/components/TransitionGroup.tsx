@@ -1,8 +1,8 @@
 import React ,{ ReactNode, TransitionEvent, useEffect, useRef, useState } from "react";
-import { NextPageDirection, TransitionGroupProps } from "./common/types.ts";
+import { NextPageDirection, TransitionGroupProps } from "../react/types/types.ts";
 import Transition from "./Transition.tsx";
 import TransitionNew from "./common/TransitionNew.tsx";
-import Container from "./common/containers/Container.tsx";
+import Container from "../react/common/components/containers/Container.tsx";
 
 export default function TransitionGroup(props : TransitionGroupProps){
 
