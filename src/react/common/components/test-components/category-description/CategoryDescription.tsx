@@ -16,7 +16,7 @@ export default function CategoryDescription(props : CategoryDescriptionProps){
             {...props}     
             >
             <HeadingBig
-            >{props.category_name}
+            >Grupa zainteresowań: {props.category_name}
             </HeadingBig>
             {props.category_content_before && 
             
@@ -25,7 +25,8 @@ export default function CategoryDescription(props : CategoryDescriptionProps){
             </Container>
             
             }
-            {props.category_content_expandable && 
+            
+            {/**props.category_content_expandable && 
             <ExpandableContainer
                 expandDirection= "topdown"
                 expandBehavior=""
@@ -34,7 +35,7 @@ export default function CategoryDescription(props : CategoryDescriptionProps){
             >
                 {props.category_content_expandable}
             </ExpandableContainer>
-            }
+            */}
 
             {props.category_content_after && 
             

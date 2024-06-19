@@ -1,141 +1,130 @@
 export const categories_data = {
     T : {
         description : [
-            "this is an something weird and shit",
-            "that is another",
+            "Praca związana z ciągłym ruchem, zmianą otoczenia, w terenie, dyspozycyjność, wytrzymałość fizyczna, zdolności adaptacyjne, odporność na stres, łatwość nawiązywania kontaktów, ciekawość świata i ludzi",
+            "transport, podróżowanie, kierowca, pilot wycieczek",
             
         ],
         suggested_trades : [
-            "war criminal",
-            "pope",
-            "politician",
-            "prostitie"
+            "transport",
+            "podrózowanie",
+            "kierowca",
+            "pilot wycieczek"
         ],
         full_name : "Transport",
     },
     M : {
         description : [
-            "this is an something weird and shit",
-            "that is another",
+            "Zawody, w których ważna jest sprawność manualna, wrażliwy dotyk, skoordynowane użycie oczu i rąk, zwinność, szybkość, siła, wytrzymałość. Precyzyjne prace z użyciem narzędzi lub przyrządów",
             
         ],
         suggested_trades : [
-            "war criminal",
-            "pope",
-            "politician",
-            "prostitie"
+            "mechanika",
+            "rzemiosło",
+            "stolarz",
+            "projektant narzędzi"
         ],
         full_name : "Mechanik",
     },
     R : {
         description : [
-            "this is an something weird and shit",
-            "that is another",
+            "Obliczanie, działanie na liczbach, prowadzenie rachunkowości., wykonanie inwentaryzacji, obliczanie z dużą dokładnością, umiejętności     w dziedzinie arytmetyki, wykonywanie kalkulacji, precyzyjne formułowanie i rozwiązywanie zadań statystycznych, przeprowadzanie rozumowania na liczbach, budowanie wykresów, przygotowanie sprawozdań finansowych, szacowanie, ocena kosztów, planowanie finansowe, kontrolowanie rachunkowości."
             
         ],
         suggested_trades : [
-            "war criminal",
-            "pope",
-            "politician",
-            "prostitie"
+            "ekonomia",
+            "bankowość",
+            "rachmistrz",
+            "inspektor",
+            "planujący/ca działaność gospodarczą"
         ],
         full_name : "Rachunkowość",
     },
     H : {
         description : [
-            "this is an something weird and shit",
-            "that is another",
+            "Zdolność oszacowania możliwości innych ludzi, szybkie orientowanie się w sytuacji, realistyczna ocena potrzeb ludzi, wpływanie na osoby, wzbudzanie zaufania i lojalności, zachęcanie, przejrzyste wyrażanie myśli, trafne wysławianie się, umiejętne redagowanie dokumentów, zmysł organizacyjny, dobra pamięć, koncentracja, przerzutność uwagi"
             
         ],
         suggested_trades : [
-            "war criminal",
-            "pope",
-            "politician",
-            "prostitie"
+            "handel",
+            "prace biurowe"
         ],
         full_name : "Handel",
     },
     J : {
         description : [
-            "this is an something weird and shit",
-            "that is another",
+            "Umiejętność posługiwania się słowami w mowie i piśmie, śmiałe występowanie przed grupą, wrażliwość na nastroje widowni, prowadzenie wykładów, wyjaśnianie, instruowanie, reprezentowanie innych, tłumaczenie czyichś idei i języka",
             
         ],
         suggested_trades : [
-            "war criminal",
-            "pope",
-            "politician",
-            "prostitie"
+            "tłumacz",
+            "nauczyciel",
+            "dziennikarz",
+            "spiker radiowy"
         ],
         full_name : "Językowiec",
     },
     W : {
         description : [
-            "this is an something weird and shit",
-            "that is another",
+            "Kompilowanie, wyszukiwanie, badanie, wybitna inteligencja, upodobanie do zajmowania się ideami, informacjami oraz koncepcjami, okazywanie nieustannej ciekawości, zamiłowanie do rzeczy drukowanych, oddanie dla ciągłego osobistego rozwoju, ciągłe uczenie się, przeszukiwanie zbiorów danych, odkrywanie, stwierdzanie, określanie"
             
         ],
         suggested_trades : [
-            "war criminal",
-            "pope",
-            "politician",
-            "prostitie"
+           "zawody 'książkowe'",
+           "związane z dużym wykształceniem",
+           "historyk",
+           "biochemik",
+           "językoznawca"
         ],
         full_name : "Wyższe wykształcenie",
     },
     S : {
         description : [
-            "this is an something weird and shit",
-            "that is another",
+            "Sfera socjalna, bliski „ciepły” kontakt z ludźmi, umiejętność rozpoczynania rozmów z nieznajomymi, uważne i dokładne słuchanie, intuicyjne rozumienie, delikatne wypytywanie, umiejętność obserwowania ludzi, precyzyjna ocena nastrojów społecznych, pomaganie osobom z problemami psychicznymi, duchowymi, społecznymi, fizycznymi i zawodowymi, usługi szpitalne"
             
         ],
         suggested_trades : [
-            "war criminal",
-            "pope",
-            "politician",
-            "prostitie"
+            "doradca zawodowy",
+            "terapeuta",
+            "fizykoterapeuta",
+            "pielęgniarka"
         ],
         full_name : "Sferfa społeczna",
     },
     K : {
         description : [
-            "this is an something weird and shit",
-            "that is another",
+            "Powierzchowny, „zimny” kontakt z ludźmi, wykonywanie poleceń, obsługiwanie lub pomaganie, świadczenie usług bez wchodzenia w głębsze relacje interpersonalne"
             
         ],
         suggested_trades : [
-            "war criminal",
-            "pope",
-            "politician",
-            "prostitie"
+            "kelner",
+            "szatniarz"
         ],
         full_name : "Kontakt z ludźmi",
     },
     P : {
         description : [
-            "this is an something weird and shit",
-            "that is another",
+            "Zawody wykonywane na wolnym powietrzu, uprawa i pielęgnacja roślin, umiejętne obchodzenie się ze zwierzętami, hodowla, tresura"
             
         ],
         suggested_trades : [
-            "war criminal",
-            "pope",
-            "politician",
-            "prostitie"
+            "rolnik",
+            "ogrodnik",
+            "hodowca",
+
         ],
         full_name : "Zawody na swieżym powietrzu",
     },
     A : {
         description : [
-            "this is an something weird and shit",
-            "that is another",
+           "Kreatywność, wymyślanie, tworzenie, generowanie nowych pomysłów, wynajdowanie i wprowadzanie innowacji, posiadanie dużych zdolności koncepcyjnych, oryginalność, wyobrażenia i improwizowanie pod wpływem impulsy chwili, komponowanie, nieustanne tworzenie nowych pomysłów dotyczących systemów, metod i procedur."
             
         ],
         suggested_trades : [
-            "war criminal",
-            "pope",
-            "politician",
-            "prostitie"
+            "kompozytor",
+            "projektant",
+            "copywriter",
+            "architekt"
         ],
         full_name : "Kreatywnośc",
     },

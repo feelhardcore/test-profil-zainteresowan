@@ -1,8 +1,8 @@
 import React ,{ ReactNode, TransitionEvent, useEffect, useRef, useState } from "react";
-import { NextPageDirection, TransitionGroupProps } from "../react/types/types.ts";
+import Container from "../containers/Container.tsx";
 import Transition from "./Transition.tsx";
-import TransitionNew from "./common/TransitionNew.tsx";
-import Container from "../react/common/components/containers/Container.tsx";
+import { NextPageDirection } from "../../../types/types.ts";
+import { TransitionGroupProps } from "../types/transitionTypes.ts";
 
 export default function TransitionGroup(props : TransitionGroupProps){
 
@@ -50,6 +50,7 @@ export default function TransitionGroup(props : TransitionGroupProps){
             if(transtionState !== TRANSITION_STAGES.NORMAL_STAGE) return
             console.log("New children arrived, trigger out ")
             setTriggerOut(true)
+            props.transitionRef.current = true;
             setTransitionState(TRANSITION_STAGES.OUT_STAGE)
             console.warn(props.next_page_direction)
             nextPageDirection[1](props.next_page_direction)
@@ -64,11 +65,13 @@ export default function TransitionGroup(props : TransitionGroupProps){
             case TRANSITION_STAGES.IN_STAGE:
                 console.log("element transitioned in, set normal state")
                 setTransitionState(TRANSITION_STAGES.NORMAL_STAGE)
+                props.transitionRef.current = false
                 break;
             case TRANSITION_STAGES.OUT_STAGE:
                 console.log("last element transitioned out, set 0 state again")
                 setTriggerOut(false)
                 setTransitionState(TRANSITION_STAGES.IN_STAGE)
+                props.transitionRef.current = false
     
         }
     }
@@ -92,6 +95,7 @@ export default function TransitionGroup(props : TransitionGroupProps){
             
          */
             console.log("Handling state 0 of transtion")
+            props.transitionRef.current = true
             setChildren(props.items)
     }
 
@@ -101,7 +105,7 @@ export default function TransitionGroup(props : TransitionGroupProps){
             {children?.map((value,index) => {
                 let shouldAppendTranstionHandler = index === children.length-1
                 return(
-                    <TransitionNew
+                    <Transition
                         update_static = {props.update_errors}
                         key = {index}
                         triggerOut = {triggerOut}
@@ -115,7 +119,7 @@ export default function TransitionGroup(props : TransitionGroupProps){
                         next_page_direction={nextPageDirection[0]}
                     >
                         {value}
-                    </TransitionNew>
+                    </Transition>
                 )
             })}
         </Container>

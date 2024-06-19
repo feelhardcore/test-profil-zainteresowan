@@ -1,4 +1,4 @@
-import { VoidCallback, Error } from "../../../types/types.ts"
+import { VoidCallback, Error, Children } from "../../../types/types.ts"
 
 export interface SingleChoiceQuestionProps{
     questionNumber : number,
@@ -15,4 +15,11 @@ export interface SingleChoiceQuestionProps{
         }
     }
 
+}
+
+export interface OptionProps extends Children{
+    isSelected : boolean,
+    events: {
+        onSelected : VoidCallback
+    }
 }

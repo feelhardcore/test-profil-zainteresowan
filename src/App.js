@@ -1,6 +1,5 @@
 
 import {BrowserRouter, Route, Routes, useNavigate} from 'react-router-dom'
-import StartingPage from './pages/starting_page/StartingPage';
 import Page404 from './pages/page_not_found/Page404';
 import TestPage from './pages/test_page/TestPage';
 import TestResult from './pages/test_result/TestResult';
@@ -14,8 +13,10 @@ import './common/css/position.css'
 import './common/css/text-align.css'
 import './common/css/float.css'
 import Footer from './react/common/components/static-page-elements/footer/Footer.tsx';
-import Instructions from './pages/Instructions.tsx';
+import Instructions from './react/intereststest/components/Instructions.tsx';
 import ResultsPage from './pages/interestsprofiletest/ResultsPage.tsx';
+import TestActivePage from './react/intereststest/pages/TestActivePage.tsx';
+import StartingPage from './react/intereststest/pages/StartingPage.tsx';
 
 function App() {
   return (
@@ -31,9 +32,14 @@ function App() {
         <Route path = '/start' element = {<TestPage/>}/>
 
         <Route path = "/results" element = {<ResultsPage/>}/>
+
+        <Route path= '/ts/start' element = {<TestActivePage/>}></Route>
+
+        <Route path= '/ts' element = {<StartingPage/>}></Route>
         
 
         <Route path = '*' element = {<Page404/>}/>
+
         
       </Routes>
     </div>

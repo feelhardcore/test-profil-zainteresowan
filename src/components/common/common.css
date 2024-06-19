@@ -130,7 +130,7 @@
     top: 25px;
 }
 .question{
-    border: 3px solid var(--blue);
+    border: 5px solid var(--blue);
     border-radius: 10px;
     overflow: hidden;
     padding: 10px;
@@ -186,6 +186,8 @@
     margin: auto;
     display : inline-block;
     text-align: center;
+    cursor: pointer;
+    user-select: none;
     vertical-align: top;
 }
 .immovable{
@@ -246,7 +248,20 @@ footer a{
         margin: auto;
         width: fit-content !important;
     }
+    #bottom-nav .text-left{
+        text-align: center;
+    }
+    .menulist{
+        width: 40%;
+    }
     
+}
+
+@media screen and (max-width: 420px) 
+{
+    .menulist{
+        display: block !important;
+    }
 }
 
 .menulist ul{
@@ -270,7 +285,7 @@ footer a{
 .testnavbar-element{
     display: inline-block;
     vertical-align: middle;
-    margin: 20px !important;
+    margin: 20px 10px !important;
 }
 .testnavbar{
     margin: auto;
@@ -433,8 +448,7 @@ footer a{
     text-align: justify;
     padding: 20px;
     margin: 20px;
-    border: 3px solid var(--blue);
-    border-radius: 25px;
+    
 
 }
 #category-desc-content{
@@ -492,4 +506,53 @@ footer .footer{
     margin : 0px 5px;
     text-decoration: none;
     color: black;
+}
+
+
+.info-popup{
+    position: fixed;
+    width:auto;
+    max-width: 1060px;
+    margin: auto;
+    text-align: center;
+    font-size: 1.2em;
+    font-style: italic;
+    padding: 30px 20px;
+    top: 0;
+    left: 0;
+    right: 0;
+    animation-name: fading;
+    animation-duration: 2s;
+    animation-delay: 1s;
+    z-index: 9999;
+    animation-fill-mode: forwards;
+}
+@keyframes fading {
+    0%{
+        display: block;
+        opacity: 100%;
+    }
+    100%{
+        display: none;
+        opacity: 0%;
+    }
+}
+
+
+.not-selected{
+    border-color: var(--red);
+}
+.error-msg{
+    padding: 10px;
+    color: var(--red);
+    font-size: var(--bigger);
+    font-style: italic;
+    font-weight: bold;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+.main{
+    text-align: center;
+    margin: 10px;
 }

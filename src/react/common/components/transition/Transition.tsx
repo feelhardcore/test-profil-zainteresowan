@@ -1,8 +1,8 @@
 import { ReactNode, TransitionEvent, TransitionEventHandler, createRef, useEffect, useRef, useState } from "react";
 import React from "react";
-import { TransitionProps } from "../../react/types/types.ts";
+import { TransitionProps } from "../types/transitionTypes";
 
-export default function TransitionNew(props : TransitionProps){
+export default function Transition(props : TransitionProps){
 
     const divRef = createRef<HTMLDivElement>()
 
@@ -57,13 +57,12 @@ export default function TransitionNew(props : TransitionProps){
     },[props.triggerOut])
 
     const baseClass = () => {
-        console.error(props.update_static)
         if(props.update_static) return ""
         let classes = ["transition"]
         switch (transitionType)
         {
             case "both" :
-                classes.push(props.nextPageDirection === "forwards" ?  "both-slide-in-out-start-left" : "both-slide-in-out-start-right")
+                classes.push(props.next_page_direction === "forwards" ?  "both-slide-in-out-start-left" : "both-slide-in-out-start-right")
         }
         return classes.join(" ")
     }

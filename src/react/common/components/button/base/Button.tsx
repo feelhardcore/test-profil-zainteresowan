@@ -24,9 +24,11 @@ export default function Button(props : ButtonProps & {children : ReactNode | str
 
     const onClick = (e : SyntheticEvent) => {
 
+        console.log(shouldHandleDisabled)
 
         if (props.disabled && !shouldHandleDisabled) return
         else if(props.disabled && shouldHandleDisabled){
+            console.log("i should hanfdle")
             if(onClickFunc) onClickFunc(e); return
         }
         //handle base button events
@@ -46,7 +48,7 @@ export default function Button(props : ButtonProps & {children : ReactNode | str
 
     }
 
-    return(<button disabled = {props.disabled} style = {generateButtonInlineStyle(props)} className={generateButtonClasses(props)} onClick={(e) => onClick(e)}>
+    return(<button style = {generateButtonInlineStyle(props)} className={generateButtonClasses(props)} onClick={(e) => onClick(e)}>
         {props.children}
     </button>)
 

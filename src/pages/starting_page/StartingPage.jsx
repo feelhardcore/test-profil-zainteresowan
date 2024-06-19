@@ -2,7 +2,6 @@ import { useNavigate } from "react-router"
 import ButtonRoundGreen from "../../react/common/components/button/ButtonRoundGreen.tsx"
 import { buttonProps } from "../../common/scripts/buttonProps.ts"
 import { navigateToInstructions, navigateToTest } from "../../common/scripts/navigate.js"
-import CategoryDescription from "../../components/category_desc/CategoryDescription.tsx"
 import { lorem, test_content_categories } from "../../common/data/test_content.js"
 import HeadingBig from "../../react/common/components/heading/HeadingBig.tsx"
 import HeadingMedium from "../../react/common/components/heading/HeadingMedium.tsx"
@@ -12,7 +11,7 @@ import SlidingQuestion from "../../components/SlidingQuestion.tsx"
 import InterestsProfileTest from "../../components/InterestsProfileTest.tsx"
 import { useState } from "react"
 import { categories_data } from "../../common/data/categories_data.js"
-
+import CategoryDescription from "../../react/common/components/test-components/category-description/CategoryDescription.tsx"
 
 function StartingPage(_props) {
     const nav = useNavigate()

@@ -32,6 +32,9 @@ export function generateButtonInlineStyle(props : ButtonProps){
     parseInlinePadding(style,props.padding)
     parseInlineMargin(style,props.margin)
     parseInlineFont(style,props.font)
+    if(props.disabled){
+        style.opacity = 0.5
+    }
     return style
 
 }

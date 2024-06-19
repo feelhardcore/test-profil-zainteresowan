@@ -272,38 +272,11 @@ export interface CustomQuestion{
 
 
 
-export interface TransitionProps extends Children{
-    type: TransitionType,
-    base_speed : number,
-    delay? : number
-    direction_in? : SlideDirection
-    direction_out? : SlideDirection
-    events?: {
-        onTransitionedOut? : TransitionEndHandler
-    }
-    triggerOut? : boolean
-    next_page_direction? : NextPageDirection
-    update_static? : boolean
-    
 
-}
 export type TransitionType = "slide-in-out" |  "show-and-hide" | "both"
 
 export type NextPageDirection = "forwards" | "backwards"
-export interface TransitionGroupProps{
-    type: TransitionType,
-    base_speed : number,
-    delay? : number
-    direction_in? : SlideDirection
-    direction_out? : SlideDirection
-    events?: {
-        onTransitionedOut? : VoidCallback
-    }
-    items : ReactNode[]
-    next_page_direction? : NextPageDirection
-    outerContainerProps? : ContainerProps
-    update_errors? : boolean
-}
+
 
 
 export interface SingleChoiceQuestionProps{

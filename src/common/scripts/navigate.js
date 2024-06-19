@@ -18,11 +18,12 @@ export function navigateToResults(results){
     navigate(paths.results,results)
 }
 
-function navigate(destination, props = null){
-    
+function navigate(destination, props){
+    console.log(props)
     console.log("using sum hookers")
     if(props){
-        nav.hook(destination,props)
+        console.log("PROS!!!!!")
+        nav.hook(destination,{state : {data : props}})
     }
     else{
         nav.hook(destination)

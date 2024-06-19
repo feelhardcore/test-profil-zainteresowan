@@ -12,9 +12,12 @@ import HeadingMedium from "../../react/common/components/heading/HeadingMedium.t
 export default function ResultsPage(props : InterestsTestResultsPageProps){
 
 
-    const results : number[] = useLocation().state.results
+    const results : number[] = useLocation().state.data.answers
 
     const testResults = calculateTestResults(results)
+
+    console.warn(results)
+    console.warn(testResults)
     
 
     const generateResultTable = () => {
@@ -159,10 +162,10 @@ export default function ResultsPage(props : InterestsTestResultsPageProps){
                 {
                     data : testResults.totalResult,
                     backgroundColor : testResults.totalResult.map(e => {
-                        if(e<5) return 'rgba(0,0,255,0.5)'
+                        if(e<5) return 'rgba(255,0,0,0.5)'
                         if(e<11) return'rgba(0,200,200,0.5)'
-                        if(e<16) return 'rgba(0,200,0,0.5)'
-                        return 'rgba(186, 242, 73,0.5)'
+                        if(e<16) return 'rgba(200,200,0,0.5)'
+                        return 'rgba(100, 242, 0,0.5)'
                     }),
                     label : "Uzyskane punkty"
                     

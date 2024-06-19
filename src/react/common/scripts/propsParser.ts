@@ -292,8 +292,11 @@ export function generateQuestionClasses(props : QuestionProps) {
     return classes.join(" ")
 }
 
-export function generateSingleChoiceQuestionClasses(props : SingleChoiceQuestionProps) {
+export function generateSingleChoiceQuestionClasses(error? : boolean) {
     let classes = ["question"]
+    if(error){
+        classes.push("not-selected")
+    }
     return classes.join(" ")
 }
 

@@ -1,13 +1,14 @@
-import React, { ReactNode, useMemo, useRef, useState } from "react";
+import React, {ReactNode, SyntheticEvent, useEffect, useMemo, useRef, useState } from "react";
 import Container from "../containers/Container.tsx";
 import HeadingMedium from '../heading/HeadingMedium.tsx'
 import {popup} from "../../../../App.js"
 import { popup_types } from "../../../../common/data/popup_types.js";
-import TransitionGroup from "../../../../components/TransitionGroup.tsx";
 import SingleChoiceQuestion from "./questions/SingleChoiceQuestion.tsx";
 import { NextPageDirection, Error} from "../../../types/types.ts";
 import { TestProps, Question, PagingOptions, TestData } from "../types/testTypes.ts";
 import TestNavBar from "./test-nav/TestNavBar.tsx";
+import TransitionGroup from "../transition/TransitionGroup.tsx";
+import HeadingSmall from "../heading/HeadingSmall.tsx";
 
 export default function Test(props : TestProps){
 
@@ -18,16 +19,47 @@ export default function Test(props : TestProps){
 
     const questionCount = questionData.questions.length
 
-    const errorRef = useRef<Error[]>(Array(questionCount).fill({
-        isError : false,
+    const errorRef = useRef<(Error)[]>(Array(questionCount).fill({
+        isError: false,
         errors : []
     }))
 
+    const transitionInProgress = useRef(false)
+    const handleKeyUp = (e : KeyboardEvent) => {
+        if(e.key == "ArrowRight"){
+            nextPage()
+        }
+        else if( e.key == "ArrowLeft"){
+            prevPage()
+        }
+        else if(e.key == "Enter") {
+            handleSubmit(null!)
+        }
+
+    }
+    
+
+    const isDesktop = useMemo(() => {
+        if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+            // true for mobile device
+            return false
+          }else{
+            // false for not mobile device
+            return true
+          }
+          
+    },[])
+    
+    
     const [page,setPage] = useState(0)
 
     const [error,setError] = useState(false)
 
+    const [pageCompleted,setPageCompleted] = useState(true)
+
     const currentQuestions = useRef<React.JSX.Element[]>()
+
+    const [testCompleted,setTestCompleted] = useState(false)
 
     const currentAnswers = useRef(Array(questionData.questions?.length).fill(null))
 
@@ -37,7 +69,13 @@ export default function Test(props : TestProps){
 
         let startingQuestionNumber = paging[page][0]
 
-        console.log(currentAnswers.current)
+        console.warn("I RERENDER")
+        console.warn("Error state: %s", error)
+        console.warn("Page completed state: %s" , pageCompleted)
+        if(error){setError(false)}
+
+        console.log(errorRef.current)
+        
 
         let questionNodes = questions.map((value,index) => {
     
@@ -48,7 +86,7 @@ export default function Test(props : TestProps){
                 questionCount={questionCount}
                 questionNumber={startingQuestionNumber+index}
                 current_answer={currentAnswers.current[startingQuestionNumber+index]}
-                error={errorRef.current?.[index]}
+                error={errorRef.current?.[index+startingQuestionNumber]}
                 events={{
                     onAnswerSelect : {
                         handler : answerSelected
@@ -67,7 +105,8 @@ export default function Test(props : TestProps){
                 base_speed={transitions.speed}
                 delay={transitions.delay_each}
                 next_page_direction= {nextPageDirection}
-                update_errors = {error}
+                update_errors = {!pageCompleted}
+                transitionRef={transitionInProgress}
             >
     
             </TransitionGroup>
@@ -85,8 +124,8 @@ export default function Test(props : TestProps){
 
     const answerSelected = (questionNumber : number, answer: number | string) => {
         currentAnswers.current[questionNumber] = answer
+        errorRef.current[questionNumber] = {isError: false, errors : []}
         checkForCompletion()
-        popup.show(popup_types.info, `Question number : ${questionNumber}, selected answer : ${answer}`)
     }
 
 
@@ -105,59 +144,109 @@ export default function Test(props : TestProps){
 
     const nextPage = () => {
         if(!isPageCompleted()) return
+        if(page >= paging.length) return;
         setPage(page+1)
         setNextPageDirection("forwards")
+        window.scrollTo({
+            top : 0,
+            behavior : "smooth"
+        })
     }
 
     const prevPage =  () => {
+        if(page == 0) return;
         setPage(page-1)
         setNextPageDirection("backwards")
+        setPageCompleted(true)
+        window.scrollTo({
+            top : 0,
+            behavior : "smooth"
+        })
     }
 
     const checkForCompletion = () => {
-
+        if(currentAnswers.current.find(e => e == null) === undefined){
+            setTestCompleted(true)
+            setPageCompleted(false) // lol
+        }
     }
 
     const isPageCompleted = () => {
 
+        if(transitionInProgress.current) return
         let currentPageBounds = paging[page];
         let lowerBound = currentPageBounds[0]
         let upperBound = currentPageBounds[1]+1
         let completed = true
         for(let i = lowerBound; i<upperBound;i++){
+            console.log("Im on index %s", i)
             if(currentAnswers.current[i] === null){
-                //if(testData.data.questions[i].optional) continue;
+                if(testData.data.questions[i].optional) continue;
                 completed = false
-                errorRef.current[i].isError = true;
-                errorRef.current[i].errors = ["Option not selected"]
-            }
+                console.log(errorRef.current![i])
+                let error : Error = {
+                    isError : true,
+                    errors : ["Proszę zaznaczyć jedną z podanych odpowiedzi"]
 
+                }
+                errorRef.current[i] = error
+            }
+            else {
+                let error : Error = {
+                    isError : false,
+                    errors : []
+                }
+                errorRef.current[i] = error
+            }  
         }
+        console.log(errorRef.current)
         setError(!completed)
+        setPageCompleted(completed)
         return completed;
+    }
+
+    const handleSubmit =  (e : SyntheticEvent) => {
+        console.log("?")
+        if(!testCompleted)
+            popup.show(popup_types.warn, "Proszę zaznaczyć odpowiedzi na wszystkie pytania", 4)
+        else {
+            console.log("!")
+            props.events.submitEventHandler(currentAnswers.current)
+        }
     }
 
 
     const transitions = props.page_transition
+
+    useEffect(() => {
+
+        window.addEventListener("keyup",handleKeyUp)
+        return () => {
+            window.removeEventListener("keyup",handleKeyUp)
+        }
+    }
+,[page])
     return(
         <Container>
             <HeadingMedium>{props.name}</HeadingMedium>
             {props.data.test_mode === "single_question" ? <HeadingMedium>
                 Który zawód z podanych podoba ci się bardziej?
             </HeadingMedium> : null}
+            <HeadingSmall>Strona {page+1}/{paging.length}</HeadingSmall>
+            {isDesktop && <HeadingSmall>(możesz używać strzałek na klawiaturze do przechodzenia między stronami)</HeadingSmall>}
             <Container>
                 {generateTestPage()}
                 <TestNavBar
                     buttons_events={{
                         left_button : (_) => {prevPage()},
                         right_button : (_) => {nextPage()},
-                        submit_button : () => {}
+                        submit_button : handleSubmit
                     }
                 }
                 buttons_enabled={{
                     left_button : page > 0,
                     right_button: page < paging.length,
-                    submit_button : true
+                    submit_button : testCompleted
                 }}
                 />
             </Container>

@@ -1,18 +1,19 @@
-import './Header.css'
-import Logo from './../../logo-al-napis.png'
-import InfoPopup from '../popup/Popup'
-import { navigate } from '../../App'
+import { navigate } from '../../../../../App'
 import {useNavigate} from 'react-router-dom'
+import React from 'react'
+import Popup from '../../popup/Popup'
 
 
 export default function Header(){
+
+    const Logo = require("../../../../../logo-al-napis.png")
 
     navigate.hook = useNavigate()
 
     return(
         <div className='header-main'>
-            <InfoPopup/>
-            <div className='header-logo'><a href='https://www.al.edu.pl'><img src = {Logo} alt = "logo"/></a></div>
+            <Popup/>
+            <div className='header-logo'><a href='https://www.al.edu.pl'><img src = {Logo} alt = "logo-al"/></a></div>
         </div>
     )
 }
