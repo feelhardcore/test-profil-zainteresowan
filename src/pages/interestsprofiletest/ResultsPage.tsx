@@ -8,6 +8,8 @@ import ClearFix from "../../react/common/components/clearfix/ClearFix.tsx";
 import { Bar, ChartProps } from "react-chartjs-2";
 import { ChartData, ChartOptions } from "chart.js";
 import HeadingMedium from "../../react/common/components/heading/HeadingMedium.tsx";
+import { categories_data } from "../../common/data/categories_data.js";
+import CategoryDescription from "../../react/common/components/test-components/category-description/CategoryDescription.tsx";
 
 export default function ResultsPage(props : InterestsTestResultsPageProps){
 
@@ -58,7 +60,7 @@ export default function ResultsPage(props : InterestsTestResultsPageProps){
                     let classes = ["td-bold" ,"td-result"]
                     switch(testResults.interestDegrees[index]){
                         case 0: classes.push(backgrounds.red); break;
-                        case 1: classes.push(backgrounds.blue); break;
+                        case 1: classes.push(backgrounds.light_blue); break;
                         case 2: classes.push(backgrounds.light_yellow); break;
                         case 3: classes.push(backgrounds.green); break;
                     }
@@ -136,7 +138,7 @@ export default function ResultsPage(props : InterestsTestResultsPageProps){
         let classes = ["td-bold" ,"td-result"]
         switch(testResults.interestDegrees[rowIndex]){
             case 0: classes.push(backgrounds.red); break;
-            case 1: classes.push(backgrounds.blue); break;
+            case 1: classes.push(backgrounds.light_blue); break;
             case 2: classes.push(backgrounds.light_yellow); break;
             case 3: classes.push(backgrounds.green); break;
         }
@@ -153,6 +155,33 @@ export default function ResultsPage(props : InterestsTestResultsPageProps){
 
 
 
+    }
+
+    const categories_explained = () => {
+        return test_content_categories.map(value => {
+            const category_content= categories_data[value]
+            let category_name = category_content.full_name
+            let before = category_content.description.map(val => {
+                return<p><span style= {{fontWeight : "bold"}}>{value}</span> - {val}</p>
+            })
+           
+            let expandable =  <Container>
+                <HeadingMedium>Sugerowane zawody: </HeadingMedium>
+                <ul>
+                    {category_content.suggested_trades.map(value => {
+                        return <li>{value}</li>
+                    })}
+                </ul>
+            </Container>
+            return <CategoryDescription
+            category_name={""}
+            category_content_before= {before}
+            category_content_expandable = {expandable}
+            >
+                
+
+            </CategoryDescription>
+        })
     }
 
     const generateChart = () => {
@@ -184,10 +213,14 @@ export default function ResultsPage(props : InterestsTestResultsPageProps){
                         size : 20,
                         family : "Raleway",
                         weight : "bold",
-                        style : "italic",
+
                         
                     },
-                    color : "red"
+                    padding : {
+                        top : 20,
+                        bottom : 30
+                    },
+                    color : "#A61E2B"
                 },
                 
                 tooltip : {
@@ -238,12 +271,13 @@ export default function ResultsPage(props : InterestsTestResultsPageProps){
             return <Container font={{
                 size : "larger"
             }} margin={"20px auto"} width="fit-content">
-                <b>Kategoria {value} : <span className= {degreeToTextColor(testResults.interestDegrees[index])}>{testResults.totalResult[index]}</span></b>
+                <b>Kategoria {value} : {testResults.totalResult[index]}</b>
             </Container>
         })}
        </Container>
 
        {generateChart()}
+       {categories_explained()}
     </Container>
 
 }

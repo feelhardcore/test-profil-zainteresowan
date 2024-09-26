@@ -25,7 +25,6 @@ export default function Transition(props : TransitionProps){
                 case "slide-in-out":
                 case "show-and-hide":
                 case "both":
-                    console.log(nextPageDirection)
                     divRef.current.classList.add(props.next_page_direction === "forwards" ? "both-slide-in-out-start-left" : "both-slide-in-out-start-right")
                 }
             
@@ -36,7 +35,6 @@ export default function Transition(props : TransitionProps){
 
 
     useEffect(() => {
-        console.log("i have been triggered my children is %s",props.children)
         if(!props.update_static)
         setTimeout(triggerTransition,50)
         

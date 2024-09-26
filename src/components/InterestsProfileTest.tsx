@@ -11,32 +11,11 @@ export default function InterestsProfileTest(props){
         navigateToResults({answers})
     }
 
-    const override = () => {
-        let answers = Array(100).fill(0).map((_ => { return Math.round(Math.random())}))
-        console.warn(answers)
-        navigateToResults({answers})
-    }
-
-    const calculateResults = (array) => {
-        let columnResult = [0,0,0,0,0,0,0,0,0,0]
-        let rowResult = [0,0,0,0,0,0,0,0,0,0]
-        let totalResult = [0,0,0,0,0,0,0,0,0,0]
-        for (let i = 0; i<10;i++){
-            for (let j = 0;j<10;j++){
-                if (array[i][j] == 0) columnResult[j]++
-                else rowResult[i]++ 
-            }
-
-        }
-        totalResult = totalResult.map((_e,i) => {return columnResult[i]+rowResult[i]})
-        return [[...rowResult],[...columnResult],[...totalResult]];
-    }
-
     return(
         <>
          <Test 
 
-name = "Test na profil zainteresowań"
+name = "Test profil zainteresowań"
 events={{
     submitEventHandler : submitEventHandler
 }}
@@ -59,7 +38,6 @@ page_transition={{
 }}
 
 />
-<ButtonRoundGreen events={{onClick : override}}>Override</ButtonRoundGreen>
         </>
        
     )

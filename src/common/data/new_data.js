@@ -235,7 +235,7 @@ export const test_content_updated =  [
     },
     {
       "options": {
-        "option1": "Artysta malarz (hmm...)",
+        "option1": "Artysta malarz",
         "option2": "Tłumacz"
       }
     },
@@ -517,7 +517,7 @@ export const test_content_updated =  [
     },
     {
       "options": {
-        "option1": "Pracownik biura podró",
+        "option1": "Pracownik biura podróży",
         "option2": "Ogrodnik"
       }
     },

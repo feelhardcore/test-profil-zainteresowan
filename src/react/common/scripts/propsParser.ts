@@ -102,13 +102,14 @@ export function parseInlineBorder( style : CSSProperties, border? : BorderProps 
 export function parseInlineFont(style : CSSProperties, font? : FontProps){
     if(font){
         if(isNumberType(font.size)) 
-            style.fontSize = font.size+ " "+ (font.size_unit || "pt")
+            style.fontSize = font.size+ (font.size_unit || "pt")
         if(isNumberType(font.weight))
             style.fontWeight = font.weight
         if(isNumberType(font.color) && font.color){
             let hex = "#"+font.color.toString(16).padStart(6,"0")
             style.color = hex
         }
+        console.log(style.fontSize)
     }
 }
 

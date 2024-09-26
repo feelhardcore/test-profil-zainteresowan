@@ -8,6 +8,7 @@ import { categories_data } from "../../../common/data/categories_data";
 import { test_content_categories } from "../../../common/data/test_content";
 import HeadingMedium from "../../common/components/heading/HeadingMedium.tsx";
 import CategoryDescription from "../../common/components/test-components/category-description/CategoryDescription.tsx";
+import RedRoundButton from "../../common/components/button/RedRoundButton.tsx";
 
 export default function StartingPage(_ : any){
 
@@ -19,10 +20,10 @@ export default function StartingPage(_ : any){
         return test_content_categories.map(value => {
             const category_content= categories_data[value]
             let category_name = category_content.full_name
-            let before = category_content.description.map(value => {
-                return<p>{value}</p>
+            let before = category_content.description.map(val => {
+                return<p><span style= {{fontWeight : "bold"}}>{value}</span> - {val}</p>
             })
-            before.push(<p>Rozwiń aby zobaczyć preferowane zawody</p>)
+           
             let expandable =  <Container>
                 <HeadingMedium>Sugerowane zawody: </HeadingMedium>
                 <ul>
@@ -32,7 +33,7 @@ export default function StartingPage(_ : any){
                 </ul>
             </Container>
             return <CategoryDescription
-            category_name={category_name}
+            category_name={""}
             category_content_before= {before}
             category_content_expandable = {expandable}
             >
@@ -44,22 +45,20 @@ export default function StartingPage(_ : any){
 
     return <Container>
         <HeadingBig>
-            Test na profil zainteresowań
+            Test profil zainteresowań
         </HeadingBig>
-        <Container>
-            Tutaj coś o teście
-        </Container>
-        <Container>
-            Tutaj coś o teście
-        </Container>
-        <ButtonRoundGreen events={{
-            onClick : moveToTest
-        }}>Wykonaj test na profil zainteresowań</ButtonRoundGreen>
+        <RedRoundButton events={{
+            onClick : moveToTest}}
+            >
+                Wykonaj test profil zainteresowań
+            </RedRoundButton>
 
-        <Container>
-            <HeadingBig> Grupy zainteresowań</HeadingBig>
+        <Container font={{size : 14, size_unit : "pt"}}>
+            <HeadingBig> Interpretacja testu</HeadingBig>
+            <Container>Litery znajdujące się w teście oznaczają grupy zawodów:</Container>
             {categories_explained()}
         </Container>
+        <i>Źródło: Zeszyty informacyjno-metodyczne doradcy zawodowego nr 11: Metody grupowego poradnictwa zawodowego. Kurs inspiracji KUP, Warszawa 1998</i>
     </Container>
 
 }

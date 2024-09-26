@@ -112,7 +112,7 @@ function StartingPage(_props) {
             >
 
             </CategoryDescription>
-
+            <i>Źródło: Zeszyty informacyjno-metodyczne doradcy zawodowego nr 11: Metody grupowego poradnictwa zawodowego. Kurs inspiracji KUP, Warszawa 1998</i>
 
         </div>
     )

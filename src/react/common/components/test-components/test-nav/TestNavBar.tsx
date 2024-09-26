@@ -2,6 +2,7 @@ import React from "react";
 import Container from "../../containers/Container.tsx";
 import Arrow from "../../arrow/Arrow.tsx";
 import ButtonRoundGreen from "../../button/ButtonRoundGreen.tsx";
+import RedRoundButton from "../../button/RedRoundButton.tsx";
 import { TestNavBarProps } from "../../types/testTypes.ts";
 
 export default function TestNavBar(props : TestNavBarProps){
@@ -32,7 +33,7 @@ export default function TestNavBar(props : TestNavBarProps){
                 }}
                 margin={"auto"} 
                 display = {"inline_block"} >
-                <ButtonRoundGreen
+                <RedRoundButton
                     disabled = {!props.buttons_enabled.submit_button} 
                     shouldHandleDisabled = {true}
                     events={{
@@ -40,7 +41,7 @@ export default function TestNavBar(props : TestNavBarProps){
                     }}>
 
                     Zakończ test
-                </ButtonRoundGreen>
+                </RedRoundButton>
             </Container>
             <Container 
                 htmlProps={{

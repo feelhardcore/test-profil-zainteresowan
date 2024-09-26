@@ -3,6 +3,8 @@ import {useLocation} from 'react-router-dom'
 import { Bar } from "react-chartjs-2"
 import 'chart.js/auto'
 import './TestResult.css'
+import HeadingMedium from "../../react/common/components/heading/HeadingMedium.tsx"
+import { color } from "chart.js/helpers"
 
 export default function TestResult(_props){
 
@@ -89,7 +91,8 @@ export default function TestResult(_props){
         plugins:{
             title:{
                 display : true,
-                text: 'Wyniki testu'
+                text: 'Wyniki testu',
+                padding : {top : 100, bottom : 100}
             }
         }
     }
@@ -102,9 +105,10 @@ export default function TestResult(_props){
 
         {generateResults()}
 
+        <HeadingMedium font={{color : "red"}}>Wyniki testu</HeadingMedium>
+
         <Bar data={data} options={options} />
 
-        {console.log(data)}
         
 
     </div>)

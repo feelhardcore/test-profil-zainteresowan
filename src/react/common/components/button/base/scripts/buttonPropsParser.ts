@@ -4,7 +4,8 @@ import {
     parseInlineBackground, 
     parseInlinePadding, 
     parseInlineMargin, 
-    parseInlineFont } 
+    parseInlineFont, 
+    parseFont} 
     from "../../../../scripts/propsParser.ts"
 import { ButtonProps } from "../../../types/buttonTypes.ts"
 
@@ -16,7 +17,7 @@ export function generateButtonClasses(props : ButtonProps){
         )
     }
     if(props.font){
-
+        classes.push(...parseFont(props.font))
     }
     if(props.margin){
 

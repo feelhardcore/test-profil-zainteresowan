@@ -2,7 +2,6 @@ export const categories_data = {
     T : {
         description : [
             "Praca związana z ciągłym ruchem, zmianą otoczenia, w terenie, dyspozycyjność, wytrzymałość fizyczna, zdolności adaptacyjne, odporność na stres, łatwość nawiązywania kontaktów, ciekawość świata i ludzi",
-            "transport, podróżowanie, kierowca, pilot wycieczek",
             
         ],
         suggested_trades : [

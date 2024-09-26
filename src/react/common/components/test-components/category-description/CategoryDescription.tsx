@@ -15,12 +15,9 @@ export default function CategoryDescription(props : CategoryDescriptionProps){
             }}
             {...props}     
             >
-            <HeadingBig
-            >Grupa zainteresowań: {props.category_name}
-            </HeadingBig>
             {props.category_content_before && 
             
-            <Container margin="20px 0 ">
+            <Container>
                 {props.category_content_before}
             </Container>
             
@@ -39,7 +36,7 @@ export default function CategoryDescription(props : CategoryDescriptionProps){
 
             {props.category_content_after && 
             
-            <Container margin="20px 0">
+            <Container>
                 {props.category_content_after}
             </Container>
             

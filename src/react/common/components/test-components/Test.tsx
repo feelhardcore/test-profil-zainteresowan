@@ -144,7 +144,7 @@ export default function Test(props : TestProps){
 
     const nextPage = () => {
         if(!isPageCompleted()) return
-        if(page >= paging.length) return;
+        if(page >= paging.length-1) return;
         setPage(page+1)
         setNextPageDirection("forwards")
         window.scrollTo({
@@ -245,7 +245,7 @@ export default function Test(props : TestProps){
                 }
                 buttons_enabled={{
                     left_button : page > 0,
-                    right_button: page < paging.length,
+                    right_button: page < paging.length - 1,
                     submit_button : testCompleted
                 }}
                 />

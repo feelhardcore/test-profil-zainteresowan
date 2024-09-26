@@ -236,6 +236,10 @@ footer a{
 
 #contact{
     font-size: var(--small);
+    font-style: normal;
+}
+#bottom-nav{
+    font-style: normal;
 }
 
 @media screen and (max-width: 600px) {
@@ -408,13 +412,13 @@ footer a{
     width: fit-content;
     border: 1px solid black;
     border-radius: 90px;
-    padding: 5px 15px;
+    padding: 15px 15px;
     margin: 20px auto;
     background-image: gray;
     text-align: center;
     cursor: pointer;
     user-select: none;
-    font-size: 1.1em;
+    font-size: 1.4em;
 }
 .toggle{
     background-image: inherit;
@@ -439,14 +443,24 @@ footer a{
     user-select: none;
 }
 
-@media screen and (max-width : 600px){
+@media screen and (max-width : 400px){
 
+    .testnavbar{
+
+        height: fit-content !important;
+
+    }
+    .testnavbar-element{
+        display: block !important;
+        margin: auto !important;
+
+    }
 
 }
 
 .category-desc{
     text-align: justify;
-    padding: 20px;
+    padding: 0 20px;
     margin: 20px;
     
 
@@ -555,4 +569,13 @@ footer .footer{
 .main{
     text-align: center;
     margin: 10px;
+}
+a {
+    text-decoration: none;
+    font-style : normal !important;
+
+
+}
+a:hover{
+    text-decoration: underline;
 }

@@ -25,17 +25,14 @@ function App() {
     <Header/>
     <div className = 'main'>
       <Routes>
-        <Route path = '/' element = {<StartingPage/>} />
 
         <Route path = '/instructions' element = {<Instructions/>} />
 
-        <Route path = '/start' element = {<TestPage/>}/>
-
         <Route path = "/results" element = {<ResultsPage/>}/>
 
-        <Route path= '/ts/start' element = {<TestActivePage/>}></Route>
+        <Route path= '/start' element = {<TestActivePage/>}></Route>
 
-        <Route path= '/ts' element = {<StartingPage/>}></Route>
+        <Route path= '/' element = {<StartingPage/>}></Route>
         
 
         <Route path = '*' element = {<Page404/>}/>

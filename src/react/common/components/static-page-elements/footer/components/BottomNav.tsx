@@ -44,6 +44,10 @@ export default function BottomNav(_ : any){
                             {
                                 value: "Portale z ofertami pracy",
                                 action : "https://al.edu.pl/biuro-karier/strefa-pracy/przydatne-linki"
+                            },
+                            {
+                                value : "Grupa na Facebooku",
+                                action : "https://www.facebook.com/groups/1891296494313190/"
                             }
 
                         ]}    
